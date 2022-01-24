@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { JobPosting } from '../model/JobPosting';
+import { JobPosting } from 'src/app/model/JobPosting';
 
 @Component({
   selector: 'app-job-grid-item',

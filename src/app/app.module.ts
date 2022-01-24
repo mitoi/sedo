@@ -11,8 +11,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-import { JobGridComponent } from './job-grid/job-grid.component';
-import { JobGridItemComponent } from './job-grid-item/job-grid-item.component';
+
+import { JobGridComponent } from './components/job-grid/job-grid.component';
+import { JobGridItemComponent } from './components/job-grid-item/job-grid-item.component';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
