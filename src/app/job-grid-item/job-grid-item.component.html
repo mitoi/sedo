@@ -1,0 +1,14 @@
+<mat-card class="mat-elevation-z5">
+    <mat-card-title-group>
+        <mat-card-title>{{model.title}}</mat-card-title>
+        <mat-card-subtitle>{{model.user.firstName}} {{model.user.lastName}} - {{model.date | date}}</mat-card-subtitle>
+        <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+    </mat-card-title-group>
+    <mat-card-content title="{{model.description}}">
+        {{model.description | slice:0:100}}...
+    </mat-card-content>
+    <mat-card-actions>
+        <!-- show this only if logged in as a user -->
+        <button mat-button>Aplica</button>
+    </mat-card-actions>
+</mat-card>
