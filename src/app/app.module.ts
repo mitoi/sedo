@@ -18,6 +18,11 @@ import { JobGridItemComponent } from './components/job-grid-item/job-grid-item.c
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { CategoryListItemComponent } from './components/category-list-item/category-list-item.component';
+import { HomeSearchCategoryComponent } from './views/home-search-category/home-search-category.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -25,7 +30,11 @@ import {MatDividerModule} from '@angular/material/divider';
     HeaderComponent,
     ToolbarComponent,
     JobGridComponent,
-    JobGridItemComponent
+    JobGridItemComponent,
+    SearchBarComponent,
+    CategoryListComponent,
+    CategoryListItemComponent,
+    HomeSearchCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +49,7 @@ import {MatDividerModule} from '@angular/material/divider';
     MatGridListModule,
     MatCardModule,
     MatDividerModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+<div class="bg-white flex flex-row m-4 justify-center">
+  <input
+    class="form-control w-4/12 shadow-md outline-gray-200 pl-3"
+    type="text"
+    name="search"
+    autocomplete="off"
+    placeholder="Cauta un anunt..."
+    #searchAd
+  >
+  <div class="mr-2 flex ml-2">
+    <button
+      (click)="onClickSearch(searchAd.value)"
+      mat-stroked-button
+    >
+      <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+      CAUTARE
+    </button>
+  </div>
+</div>
