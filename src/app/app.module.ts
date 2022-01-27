@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { ToolbarComponent } from './views/toolbar/toolbar.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 
-import { JobGridComponent } from './components/job-grid/job-grid.component';
+import { JobGridComponent } from './views/job-grid/job-grid.component';
 import { JobGridItemComponent } from './components/job-grid-item/job-grid-item.component';
 
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -24,6 +24,15 @@ import { CategoryListItemComponent } from './components/category-list-item/categ
 import { HomeSearchCategoryComponent } from './views/home-search-category/home-search-category.component';
 import {MatListModule} from "@angular/material/list";
 
+import { LoginComponent } from './layouts/login/login.component';
+import { HomeComponent } from './layouts/home/home.component';
+import { RegisterComponent } from './layouts/register/register.component';
+
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +43,10 @@ import {MatListModule} from "@angular/material/list";
     SearchBarComponent,
     CategoryListComponent,
     CategoryListItemComponent,
-    HomeSearchCategoryComponent
+    HomeSearchCategoryComponent,
+    LoginComponent,
+    HomeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,8 +60,11 @@ import {MatListModule} from "@angular/material/list";
     MatDividerModule,
     MatGridListModule,
     MatCardModule,
-    MatDividerModule,
     MatListModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
