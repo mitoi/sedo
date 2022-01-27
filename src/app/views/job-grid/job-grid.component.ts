@@ -36,6 +36,7 @@ export class JobGridComponent implements OnInit {
       user: {
         type: 'client',
         firstName: 'Ion',
+        email: 'ion@ion',
         lastName: 'George',
         profilePic: '4343'
       }
@@ -48,6 +49,21 @@ export class JobGridComponent implements OnInit {
       category: 'Constructii',
       user: {
         type: 'client',
+        email: 'ion@ion',
+        firstName: 'Ion',
+        lastName: 'George',
+        profilePic: '4343'
+      }
+    },
+    {
+      title: 'Construirea unui balcon',
+      description: 'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
+      date: new Date("2019-01-16"),
+      location: 'Bucuresti, Romania',
+      category: 'Constructii',
+      user: {
+        type: 'client',
+        email: 'ion@ion',
         firstName: 'Ion',
         lastName: 'George',
         profilePic: '4343'
@@ -62,6 +78,7 @@ export class JobGridComponent implements OnInit {
       user: {
         type: 'client',
         firstName: 'Ion',
+        email: 'ion@ion',
         lastName: 'George',
         profilePic: '4343'
       }
@@ -75,19 +92,7 @@ export class JobGridComponent implements OnInit {
       user: {
         type: 'client',
         firstName: 'Ion',
-        lastName: 'George',
-        profilePic: '4343'
-      }
-    },
-    {
-      title: 'Construirea unui balcon',
-      description: 'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-      date: new Date("2019-01-16"),
-      location: 'Bucuresti, Romania',
-      category: 'Constructii',
-      user: {
-        type: 'client',
-        firstName: 'Ion',
+        email: 'ion@ion',
         lastName: 'George',
         profilePic: '4343'
       }
@@ -101,6 +106,7 @@ export class JobGridComponent implements OnInit {
         type: 'client',
         firstName: 'Ion',
         lastName: 'George',
+        email: 'ion@ion',
         profilePic: '4343'
       }
     },
