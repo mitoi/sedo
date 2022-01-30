@@ -30,6 +30,8 @@ import { RegisterComponent } from './layouts/register/register.component';
 
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -65,6 +67,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

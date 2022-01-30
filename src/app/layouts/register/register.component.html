@@ -1,3 +1,4 @@
+<app-toolbar></app-toolbar>
 <mat-grid-list [cols]="cols$ | async">
     <mat-grid-tile>
         <div>
@@ -5,12 +6,12 @@
                 <mat-step [stepControl]="firstFormGroup">
                   <form [formGroup]="firstFormGroup">
                     <ng-template matStepLabel>Vreau sa fiu</ng-template>
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="outline">
                         <mat-label>Alege</mat-label>
-                        <mat-select formControlName="firstCtrl">
-                            <mat-option value="option">Client</mat-option>
-                            <mat-option value="option">Furnizor</mat-option>
-                            <mat-option value="option">ONG</mat-option>
+                        <mat-select formControlName="userTypeCtrl" (selectionChange)="updateUserType()">
+                            <mat-option value="client">Client</mat-option>
+                            <mat-option value="furnizor">Furnizor</mat-option>
+                            <mat-option value="ong">ONG</mat-option>
                         </mat-select>
                         <mat-hint align="end">
                            Alege tipul de utilizator
@@ -24,23 +25,79 @@
                 <mat-step [stepControl]="secondFormGroup">
                   <form [formGroup]="secondFormGroup">
                     <ng-template matStepLabel>Detalii de inregistrare</ng-template>
-                    <mat-form-field appearance="fill">
-                      <mat-label>Address</mat-label>
-                      <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                             required>
-                    </mat-form-field>
+                        <mat-form-field *ngIf="userType == 'furnizor' || userType == 'client'" appearance="outline" [style.width.%]="100">
+                          <mat-label>Prenume</mat-label>
+                          <input matInput formControlName="firstNameCtrl" placeholder="Prenume..."
+                                required>
+                        </mat-form-field>
+                        <br>
+
+                        <mat-form-field appearance="outline" [style.width.%]="100">
+                          <mat-label>Nume</mat-label>
+                          <input matInput formControlName="lastNameCtrl" placeholder="Nume..."
+                                required>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="outline" [style.width.%]="100">
+                          <mat-label>Email</mat-label>
+                          <input matInput formControlName="emailCtrl" placeholder="Email..." required>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field  appearance="outline" [style.width.%]="100">
+                          <mat-label>Parola</mat-label>
+                          <input matInput formControlName="passwordCtrl" [type]="hidepassword ? 'password' : 'text'">
+                          <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword" [attr.aria-label]="'Ascunde parola'" [attr.aria-pressed]="hidepassword">
+                            <mat-icon>{{hidepassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                          </button>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="outline" [style.width.%]="100">
+                          <mat-label>Telefon</mat-label>
+                          <span matPrefix>+4 &nbsp;</span>
+                          <input type="tel" matInput formControlName="telephoneCtrl" placeholder="0740-222-222">
+                          <mat-icon matSuffix>mode_edit</mat-icon>
+                        </mat-form-field>
+                        
+                        <br>
+                        <mat-form-field *ngIf="userType == 'furnizor'" appearance="outline" [style.width.%]="100">
+                          <mat-label>Aptitudini</mat-label>
+                          <mat-chip-list #chipList aria-label="Selectie Aptitudini">
+                            <mat-chip
+                              *ngFor="let skill of skills"
+                              (removed)="remove(skill)">
+                              {{skill}}
+                              <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                              </button>
+                            </mat-chip>
+                            <input
+                              placeholder="Aptitudine noua..."
+                              #skillsInput
+                              formControlName="skillsCtrl"
+                              [matAutocomplete]="auto"
+                              [matChipInputFor]="chipList"
+                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              (matChipInputTokenEnd)="add($event)">
+                          </mat-chip-list>
+                          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                              {{skill}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                   
+
                     <div>
                       <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button matStepperNext>Next</button>
+                      <button mat-button matStepperNext (click)="createAccount()">Next</button>
                     </div>
                   </form>
                 </mat-step>
                 <mat-step>
                   <ng-template matStepLabel>Gata</ng-template>
-                  <p>You are now done.</p>
+                  <p>Contul tau a fost creat</p>
                   <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="stepper.reset()">Reset</button>
+                    <button mat-button routerLink="/login">Login</button>
                   </div>
                 </mat-step>
               </mat-stepper>
