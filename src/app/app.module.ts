@@ -34,6 +34,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ItemComponent } from './views/item/item.component';
+import {NgxGalleryModule} from "@kolkov/ngx-gallery";
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    ItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     MatChipsModule,
     MatAutocompleteModule,
+    NgxGalleryModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

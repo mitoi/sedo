@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z5">
+<mat-card class="mat-elevation-z5" (click)="onClickItem()">
     <mat-card-title-group>
         <mat-card-title>{{model.title}}</mat-card-title>
         <mat-card-subtitle>{{model.user.firstName}} {{model.user.lastName}} - {{model.date | date}}</mat-card-subtitle>

@@ -1,0 +1,23 @@
+.main-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-list-base.inline-list {
+  display: flex;
+}
+
+.page-container {
+  margin: 0 auto;
+  max-width: 1300px;
+}
+
+.page-content {
+  padding: 0 15px 15px 15px;
+}
+
+.mat-grid-tile .mat-figure {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}
