@@ -1,8 +1,10 @@
 import express, {Application} from 'express';
 import SedoConfig from './config/config';
-import {register} from './routes/register';
-import {login} from './routes/login';
+import {register} from './routes/user/register';
+import {login} from './routes/user/login';
+import {createItem} from './routes/item/createItem';
 import mongoose from 'mongoose';
+import {auth} from './middleware/auth';
 
 const app:Application = express();
 
@@ -11,6 +13,7 @@ app.use(express.json());
 
 app.post('/v1/register', register);
 app.post('/v1/login', login);
+app.post('/v1/createItem', auth, createItem);
 
 const mongoUrl: string = `mongodb://${SedoConfig.MongoHost}:${SedoConfig.MongoPort}/${SedoConfig.MongoDbName}`;
 
