@@ -1,109 +1,32 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { ActivatedRoute} from "@angular/router";
-import {JobPosting} from "../../model/JobPosting";
-import {merge, Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map} from "rxjs/operators";
-import {NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions} from "@kolkov/ngx-gallery";
+import { JobPosting } from 'src/app/model/JobPosting';
+
+import {ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
 
 @Component({
-  selector: 'app-item',
-  templateUrl: './item.component.html',
-  styleUrls: ['./item.component.css']
+  selector: 'app-job-suggestions',
+  templateUrl: './job-suggestions.component.html',
+  styleUrls: ['./job-suggestions.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItemComponent implements OnInit {
-  @Input()
-  model!: JobPosting;
-  id: string;
-  category: string;
-  itemPositionsLayout: Observable<number>;
-  galleryOptions: NgxGalleryOptions[] = [];
-  galleryImages: NgxGalleryImage[] = [];
+export class JobSuggestionsComponent implements OnInit {
+  category: any;
+  postings: JobPosting[] = [];
 
   constructor(private route: ActivatedRoute, private breakpointObserver: BreakpointObserver) {
-    this.id = this.route.snapshot.params['id'];
     this.category = this.route.snapshot.queryParams['category'];
-
-    this.buildGallery();
-    
-    //still keep merge for the future
-    this.itemPositionsLayout = merge(
-      this.breakpointObserver
-          .observe([Breakpoints.Small, Breakpoints.XSmall])
-          .pipe(
-            map((result) => {
-              if (result.breakpoints[Breakpoints.XSmall] || result.breakpoints[Breakpoints.Small]) {
-                return 1;
-              }
-
-              return 2;
-            })
-          ),
-    )
-  }
-
-  buildGallery(): void {
-    this.galleryOptions = [
-      {
-        width: '600px',
-        height: '400px',
-        thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Slide,
-        previewCloseOnClick: true
-      },
-      // max-width 800
-      {
-        breakpoint: 800,
-        width: '100%',
-        height: '400px',
-        imagePercent: 80,
-        thumbnailsPercent: 20,
-        thumbnailsMargin: 20,
-        thumbnailMargin: 20
-      },
-      // max-width 400
-      {
-        breakpoint: 400,
-        preview: false
-      }
-    ];
-
-    this.galleryImages = [
-      {
-        small: 'https://www.akc.org/wp-content/uploads/2018/07/preventing-body-sensitivity.jpg',
-        medium: 'https://www.akc.org/wp-content/uploads/2018/07/preventing-body-sensitivity.jpg',
-        big: 'https://www.akc.org/wp-content/uploads/2018/07/preventing-body-sensitivity.jpg'
-      },
-      {
-        small: 'https://umeandthekids.com/wp-content/uploads/2020/12/Why-You-Should-Get-a-Family-Dog-1.jpeg',
-        medium: 'https://umeandthekids.com/wp-content/uploads/2020/12/Why-You-Should-Get-a-Family-Dog-1.jpeg',
-        big: 'https://umeandthekids.com/wp-content/uploads/2020/12/Why-You-Should-Get-a-Family-Dog-1.jpeg'
-      },
-      {
-        small: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202108/international_dog_day_2021_4_r_1200x768.jpeg?mhENil.rEsB2Wju30UDroUYKmJ4NfkX4&size=1200:675',
-        medium: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202108/international_dog_day_2021_4_r_1200x768.jpeg?mhENil.rEsB2Wju30UDroUYKmJ4NfkX4&size=1200:675',
-        big: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202108/international_dog_day_2021_4_r_1200x768.jpeg?mhENil.rEsB2Wju30UDroUYKmJ4NfkX4&size=1200:675'
-      },{
-        small: 'https://hips.hearstapps.com/clv.h-cdn.co/assets/17/29/1500566326-gettyimages-512366437-1.jpg',
-        medium: 'https://hips.hearstapps.com/clv.h-cdn.co/assets/17/29/1500566326-gettyimages-512366437-1.jpg',
-        big: 'https://hips.hearstapps.com/clv.h-cdn.co/assets/17/29/1500566326-gettyimages-512366437-1.jpg'
-      }
-    ];
   }
 
   ngOnInit(): void {
-    this.model = this.getDemoData(this.id);
+      this.loadJobs();
   }
 
-  ngOnChanges(): void {
-  }
-
-  async fetchModel(): Promise<void> {
-
-  }
-
-  getDemoData(id: string): JobPosting {
-    let data: JobPosting[] = [
+  loadJobs(): void {
+    this.postings = [
       {
         id: '1',
         title: 'Construirea unui balcon',
@@ -201,8 +124,8 @@ export class ItemComponent implements OnInit {
           rating: 5,
           profilePic: '4343'
         }
-      },
+      }
     ];
-    return data[Number(id) + 1];
   }
+
 }

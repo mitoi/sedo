@@ -36,6 +36,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemComponent } from './views/item/item.component';
 import {NgxGalleryModule} from "@kolkov/ngx-gallery";
+import { JobSuggestionsComponent } from './views/job-suggestions/job-suggestions.component';
+import { JobComponent } from './layouts/job/job.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,8 @@ import {NgxGalleryModule} from "@kolkov/ngx-gallery";
     HomeComponent,
     RegisterComponent,
     ItemComponent,
+    JobSuggestionsComponent,
+    JobComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,7 @@ import {NgxGalleryModule} from "@kolkov/ngx-gallery";
     MatChipsModule,
     MatAutocompleteModule,
     NgxGalleryModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
