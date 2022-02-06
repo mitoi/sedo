@@ -1,56 +1,36 @@
 <app-toolbar></app-toolbar>
-<div class="bg-slate-50">
-  <div class="page-container">
-    <div class="page-content">
-      <mat-grid-list [cols]="(itemPositionsLayout | async)?.gridCol"  gutterSize="10px">
-        <mat-grid-tile
-          *ngFor="let itemPosition of (itemPositionsLayout | async)?.titlePositions"
-          class="mat-elevation-z0"
-          [colspan]="itemPosition.col"
-          [rowspan]="itemPosition.row"
-          [style.background]="'white'"
-          [ngSwitch]="itemPosition.componentName"
-        >
-          <ngx-gallery *ngSwitchCase="'mainImage'"  [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-          <div *ngSwitchCase="'announce'">
-  <!--            <img mat-card-image  alt="" class="rounded-lg" src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
-          </div>
+<div class="container mx-auto px-5">
+  
+  <div [ngClass]="{'columns-2': (itemPositionsLayout | async) == 2, 'columns-1': (itemPositionsLayout | async) == 1}">
+    <div>
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+    </div>
+  
+    <div>
+        <mat-card class="mat-elevation-z0">
+          <mat-card-header>
+            <div mat-card-avatar class="bg-contain">
+              <img class="bg-contain rounded-full" style="width: 40px;height: 40px;" mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            </div>
+            <mat-card-title>{{model.user.firstName}} {{model.user.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{model.user.email}}</mat-card-subtitle>
+          </mat-card-header>
 
-  <!--        <div *ngSwitchCase="'smallGallery'">-->
-  <!--          <mat-list class="inline-list">-->
-  <!--            <mat-list-item>-->
-  <!--              <img mat-card-image class="rounded-lg tile-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
-  <!--            </mat-list-item>-->
-  <!--            <mat-list-item>-->
-  <!--              <img mat-card-image class="rounded-lg tile-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
-  <!--            </mat-list-item>-->
-  <!--            <mat-list-item>-->
-  <!--              <img mat-card-image class="rounded-lg tile-image" src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
-  <!--            </mat-list-item>-->
-  <!--          </mat-list>-->
-  <!--        </div>-->
-            <mat-card class="mat-elevation-z0"  *ngSwitchCase="'userDetails'">
-              <mat-card-header>
-                <div mat-card-avatar class="bg-contain">
-                  <img class="bg-contain rounded-full" style="width: 40px;height: 40px;" mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                </div>
-                <mat-card-title>{{model.user.firstName}} {{model.user.lastName}}</mat-card-title>
-                <mat-card-subtitle>{{model.user.email}}</mat-card-subtitle>
-              </mat-card-header>
+          <mat-card-content>
+            Rating - Placeholder
+          </mat-card-content>
+        </mat-card>
 
-              <mat-card-content>
-                <p>
-                  The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                  A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                  bred for hunting.
-                </p>
-              </mat-card-content>
-              <mat-card-actions>
-                <button class="w-full" mat-button>Aplica</button>
-              </mat-card-actions>
-            </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+        <div class="font-bold text-2xl ml-2">{{model.title}}</div>
+        <div class="ml-2">
+          {{model.description}}
+        </div>
+        <div class="mt-20">
+          <button class="float-right" mat-raised-button>Aplica</button>
+        </div>
     </div>
   </div>
+
+  
+
 </div>
