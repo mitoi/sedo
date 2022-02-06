@@ -4,7 +4,7 @@
   "description": "Sedo server",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+    "sedo": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
   },
   "keywords": [
     "jwt",
