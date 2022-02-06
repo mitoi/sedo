@@ -1,0 +1,2 @@
+1. npm install --silent -g typescript ts-node
+2. npm install
