@@ -1,0 +1,36 @@
+<app-toolbar></app-toolbar>
+<div class="container mx-auto px-5">
+  
+  <div [ngClass]="{'columns-2': (itemPositionsLayout | async) == 2, 'columns-1': (itemPositionsLayout | async) == 1}">
+    <div>
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+    </div>
+  
+    <div>
+        <mat-card class="mat-elevation-z0">
+          <mat-card-header>
+            <div mat-card-avatar class="bg-contain">
+              <img class="bg-contain rounded-full" style="width: 40px;height: 40px;" mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            </div>
+            <mat-card-title>{{model.user.firstName}} {{model.user.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{model.user.email}}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            Rating - Placeholder
+          </mat-card-content>
+        </mat-card>
+
+        <div class="font-bold text-2xl ml-2">{{model.title}}</div>
+        <div class="ml-2">
+          {{model.description}}
+        </div>
+        <div class="mt-20">
+          <button class="float-right w-full" mat-raised-button>Aplica</button>
+        </div>
+    </div>
+  </div>
+
+  
+
+</div>

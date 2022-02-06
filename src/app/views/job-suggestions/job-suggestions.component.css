@@ -1,0 +1,15 @@
+.cdk-virtual-scroll-data-source-example .example-viewport {
+    margin-top: 30px;
+    height: 270px;
+}
+  
+.cdk-virtual-scroll-data-source-example .example-viewport .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+  
+.cdk-virtual-scroll-data-source-example .example-item {
+    margin-left: 10px;
+    width: 270px;
+    height: 100%;
+}
