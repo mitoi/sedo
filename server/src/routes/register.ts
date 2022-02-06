@@ -62,10 +62,6 @@ const register = async (req: Request, res: Response) => {
     } catch (err) {
         console.log(err);
     }
-
-    return res.send({
-        status: 'registered',
-    });
 };
 
 export {
