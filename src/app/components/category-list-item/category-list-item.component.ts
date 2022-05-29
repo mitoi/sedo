@@ -17,6 +17,5 @@ export class CategoryListItemComponent implements OnInit {
   }
 
   onClickCategory() {
-    debugger;
   }
 }

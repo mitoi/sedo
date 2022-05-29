@@ -112,6 +112,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           firstName: 'Ion',
           email: 'ion@ion',
@@ -131,6 +132,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           email: 'ion@ion',
           firstName: 'Ion',
@@ -147,6 +149,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           email: 'ion@ion',
           firstName: 'Ion',
@@ -163,6 +166,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           firstName: 'Ion',
           email: 'ion@ion',
@@ -179,6 +183,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           firstName: 'Ion',
           email: 'ion@ion',
@@ -194,6 +199,7 @@ export class ItemComponent implements OnInit {
         location: 'Bucuresti, Romania',
         category: 'Constructii',
         user: {
+          id: 'userId',
           type: 'client',
           firstName: 'Ion',
           lastName: 'George',
