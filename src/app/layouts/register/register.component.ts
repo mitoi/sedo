@@ -7,6 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { SedoService } from 'src/app/service/sedo.service';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('skillsInput')
   skillsInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private breakpointObserver: BreakpointObserver, private _formBuilder: FormBuilder) { 
+  constructor(private breakpointObserver: BreakpointObserver, private _formBuilder: FormBuilder, private sedoService: SedoService) { 
     this.filteredSkills = this.skillsCtrl.valueChanges.pipe(
       startWith(null),
       map((skill: string | null) => (skill ? this._filter(skill) : this.allSkills.slice())),
@@ -107,16 +108,16 @@ export class RegisterComponent implements OnInit {
 
   createAccount(): void {
     const payload = {
-      userType: this.userType,
+      type: this.userType,
       firstName: this.secondFormGroup.controls['firstNameCtrl'].value,
       lastName: this.secondFormGroup.controls['lastNameCtrl'].value,
       email: this.secondFormGroup.controls['emailCtrl'].value,
       password: this.secondFormGroup.controls['passwordCtrl'].value,
       phone: this.secondFormGroup.controls['telephoneCtrl'].value,
       skills: this.secondFormGroup.controls['skillsCtrl'].value,
+      rating: 0,
     };
 
-    // call server
-    // show alert
+    this.sedoService.register(payload);
   }
 }

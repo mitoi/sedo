@@ -19,8 +19,8 @@ const register = async (req: Request, res: Response) => {
             password,
         } = req.body;
 
-        if (!(firstName && lastName && phone && profilePic && skills
-            && email && type && rating && password)) {
+        if (!(firstName && lastName && phone
+            && email && type && password)) {
             return res.status(400).send('Toate campurile sunt obligatorii');
         }
 
@@ -30,7 +30,12 @@ const register = async (req: Request, res: Response) => {
             return res.status(409).send('Utilizatoru exista deja');
         }
 
-        const encryptedPass: string = await bcryptjs.hash(password, SALT);
+        let encryptedPass: string;
+        try {
+            encryptedPass = await bcryptjs.hash(password, SALT);
+        } catch (error) {
+            return res.status(500).send('Eroare la inregistrare. Incearca din nou.');
+        }
 
         const user = await User.create({
             firstName,

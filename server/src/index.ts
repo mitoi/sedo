@@ -3,9 +3,16 @@ import SedoConfig from './config/config';
 import {register} from './routes/register';
 import {login} from './routes/login';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 const app:Application = express();
+const allowedOrigins = ['http://localhost:4200'];
 
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 

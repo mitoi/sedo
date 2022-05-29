@@ -12,7 +12,7 @@ class SedoConfig {
     }
 
     static get MongoHost(): string {
-        return process.env.MONGO_HOST || 'localhost';
+        return process.env.MONGO_HOST || '127.0.0.1';
     }
 
     static get MongoPort(): string {

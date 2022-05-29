@@ -40,6 +40,8 @@ import { JobSuggestionsComponent } from './views/job-suggestions/job-suggestions
 import { JobComponent } from './layouts/job/job.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +81,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatAutocompleteModule,
     NgxGalleryModule,
     ScrollingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
