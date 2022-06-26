@@ -11,6 +11,7 @@ interface UserType {
   rating: string;
   password: string;
   token: string;
+  expiresIn: string;
 }
 
 const userSchema = new Schema<UserType>({

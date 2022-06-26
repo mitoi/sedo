@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { SedoService } from 'src/app/service/sedo.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  loginForm!: FormGroup;
+
+  constructor(private breakpointObserver: BreakpointObserver, private sedoService: SedoService, private _formBuilder: FormBuilder) { }
   cols$: Observable<number> = this.breakpointObserver
   .observe([Breakpoints.Small, Breakpoints.XSmall])
   .pipe(
@@ -28,10 +32,18 @@ export class LoginComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.loginForm = this._formBuilder.group({
+      usernameCtrl: ['', Validators.required],
+      passwordCtrl: ['', Validators.required],
+    });
   }
 
   login(): void {
-    console.log('Logging in')
+    const payload = {
+      email: this.loginForm.controls['usernameCtrl'].value,
+      password: this.loginForm.controls['passwordCtrl'].value,
+    }
+    this.sedoService.login(payload);
   }
 
 }

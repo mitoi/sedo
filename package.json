@@ -25,6 +25,7 @@
     "@ngneat/tailwind": "^7.0.3",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
+    "moment": "^2.29.3",
     "ngx-stars": "^1.5.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
