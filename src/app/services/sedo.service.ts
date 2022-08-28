@@ -16,6 +16,7 @@ export class SedoService {
         this.http.post(this.url + '/login', data).subscribe(data => {
             this.setSession(data);
         }, error => {
+            alert(error.error)
             return {error: error}
         })
     }

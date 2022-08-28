@@ -18,7 +18,8 @@
                     </button>
                 </mat-form-field>
                 <br>
-                <button mat-raised-button [style.width.%]="100" (click)="login()">Intra in cont</button>
+                <button mat-raised-button [style.width.%]="100" (click)="login()" [disabled]="loading">
+                    Intra in cont</button>
                 <a class="mt-6 float-right text-blue-700"  routerLink="/register">Inregistrare</a>
             </form>
         </div>

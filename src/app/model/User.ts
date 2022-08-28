@@ -4,6 +4,7 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string,
-    rating: number,
+    rating?: number,
     profilePic?: string,
+    token?: string,
 }

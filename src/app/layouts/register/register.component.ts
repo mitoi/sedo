@@ -7,7 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { SedoService } from 'src/app/service/sedo.service';
+import { SedoService } from 'src/app/services/sedo.service';
 
 @Component({
   selector: 'app-register',
