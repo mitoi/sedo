@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,29 +8,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
+  loggedIn: any;
 
-  constructor() { }
+  constructor(
+    private accountService: AccountService
+  ) { }
 
   ngOnInit(): void {
+    this.loggedIn = this.accountService.getLoggedInUser();
   }
 
-  onClickLogin() {
-    console.log('login');
+  logout():void {
+    this.accountService.logout(true);
   }
 
-  onClickRegister() {
-    console.log('register');
-  }
-
-  onClickClient() {
-    console.log('client');
-  }
-
-  onClickSupplier() {
-    console.log('supplier');
-  }
-
-  onClickONG() {
-    console.log('ong');
-  }
+  addPost(): void {}
+  addDonation(): void {}
+  goToSettings(): void {}
 }

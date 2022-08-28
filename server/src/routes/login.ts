@@ -31,7 +31,8 @@ const login = async (req: Request, res: Response) => {
             );
 
             user.token = token;
-
+            user.expiresIn = '7200'; //2 hrs
+            user.password = '';
             return res.status(200).json(user);
         }
 

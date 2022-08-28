@@ -3,23 +3,25 @@
     <mat-grid-tile>
         <div>
             <div class="mb-20 text-xl">Bine ai venit pe pagina <b>SEDO</b></div>
-
-            <mat-form-field appearance="outline" [style.width.%]="100">
-                <mat-label>Nume Utilizator</mat-label>
-                <input matInput placeholder="Utilizator">
-                <mat-icon matSuffix>account_circle</mat-icon>
-            </mat-form-field>
-            <br>
-            <mat-form-field appearance="outline" [style.width.%]="100">
-                <mat-label>Parola</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-            <br>
-            <button mat-raised-button [style.width.%]="100" (click)="login()">Intra in cont</button>
-            <a class="mt-6 float-right text-blue-700"  routerLink="/register">Inregistrare</a>
+            <form [formGroup]="loginForm">
+                <mat-form-field appearance="outline" [style.width.%]="100">
+                    <mat-label>Nume Utilizator</mat-label>
+                    <input matInput formControlName="usernameCtrl" placeholder="Utilizator">
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="outline" [style.width.%]="100">
+                    <mat-label>Parola</mat-label>
+                    <input matInput formControlName="passwordCtrl" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br>
+                <button mat-raised-button [style.width.%]="100" (click)="login()" [disabled]="loading">
+                    Intra in cont</button>
+                <a class="mt-6 float-right text-blue-700"  routerLink="/register">Inregistrare</a>
+            </form>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>

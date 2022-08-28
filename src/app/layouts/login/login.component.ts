@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, first } from 'rxjs/operators';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { SedoService } from '../../services/sedo.service';
+import { AccountService } from 'src/app/services/account.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +16,17 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  loginForm!: FormGroup;
+
+  loading = false;
+  submitted = false;
+
+  constructor(private breakpointObserver: BreakpointObserver, 
+    private authService: AccountService,
+    private alertService: AlertService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private sedoService: SedoService, private _formBuilder: FormBuilder) { }
   cols$: Observable<number> = this.breakpointObserver
   .observe([Breakpoints.Small, Breakpoints.XSmall])
   .pipe(
@@ -28,10 +43,36 @@ export class LoginComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.loginForm = this._formBuilder.group({
+      usernameCtrl: ['', Validators.required],
+      passwordCtrl: ['', Validators.required],
+    });
   }
 
   login(): void {
-    console.log('Logging in')
+    const payload = {
+      email: this.loginForm.controls['usernameCtrl'].value,
+      password: this.loginForm.controls['passwordCtrl'].value,
+    }
+
+    this.submitted = true;
+    this.loading = true;
+    // reset alerts on submit
+    this.alertService.clear();
+
+    this.authService.login(this.loginForm.controls['usernameCtrl'].value, this.loginForm.controls['passwordCtrl'].value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    // get return url from query parameters or default to home page
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    this.router.navigateByUrl(returnUrl);
+                },
+                error: error => {
+                    this.alertService.error(error.error);
+                    this.loading = false;
+                }
+            });
   }
 
 }

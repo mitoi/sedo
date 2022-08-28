@@ -41,6 +41,7 @@ import { JobComponent } from './layouts/job/job.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { HttpClientModule } from '@angular/common/http';
     ItemComponent,
     JobSuggestionsComponent,
     JobComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
