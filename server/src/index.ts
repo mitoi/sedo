@@ -2,22 +2,30 @@ import express, {Application} from 'express';
 import SedoConfig from './config/config';
 import {register} from './routes/register';
 import {login} from './routes/login';
+import {uploadPhoto} from './routes/image/uploadImage';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import {upload} from './utils/upload';
+import {getImage} from './routes/image/getImage';
+import {jwtValidator} from './utils/jwtValidator';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
 
 const options: cors.CorsOptions = {
-  origin: allowedOrigins
+    origin: allowedOrigins,
 };
 
 app.use(cors(options));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+app.use('/resources', [jwtValidator, express.static(`${__dirname}/upload`)]);
+
+app.get('/v1/getImage', jwtValidator, getImage);
 app.post('/v1/register', register);
 app.post('/v1/login', login);
+app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);
 
 const mongoUrl: string = `mongodb://${SedoConfig.MongoHost}:${SedoConfig.MongoPort}/${SedoConfig.MongoDbName}`;
 

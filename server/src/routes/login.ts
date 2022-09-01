@@ -26,12 +26,12 @@ const login = async (req: Request, res: Response) => {
                 },
                 SedoConfig.TokenKey,
                 {
-                    expiresIn: '2h',
+                    expiresIn: SedoConfig.AccessTokenExpiresIn,
                 },
             );
 
             user.token = token;
-            user.expiresIn = '7200'; //2 hrs
+            user.expiresIn = SedoConfig.AccessTokenExpiresInSeconds; //2 hrs
             user.password = '';
             return res.status(200).json(user);
         }
