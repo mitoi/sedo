@@ -1,0 +1,50 @@
+import {Request, Response} from 'express';
+import * as fs from 'fs';
+import {DataType, Image, ImageType} from '../../models/image';
+import path from 'path';
+
+const uploadPhoto = async (req: Request, res: Response) => {
+    const {file} = req;
+
+    if (!file) {
+        res.status(422);
+
+        return;
+    }
+
+    const saveImageContentDb = true;
+
+    const basePath: string = path.join(__dirname, '../../upload/images/');
+    const filePath = `${basePath}${file.filename}`;
+
+    const name: string = req?.body?.name || 'LipsaNume';
+
+    const imageBuffer: Buffer | null = saveImageContentDb ? fs.readFileSync(filePath) : null;
+
+    const image: DataType = {
+        contentType: 'image/png',
+        path: filePath,
+        data: imageBuffer,
+    };
+
+    const img:ImageType = {
+        name,
+        image,
+    };
+
+    const record = await Image.create(img);
+
+    if (!record) {
+        res.status(500).send('Nu sa putut stoca imaginea');
+
+        return;
+    }
+
+    const {id} = record;
+    // res.status(201).json(image);
+    res.status(201).json({id});
+};
+
+export {
+    uploadPhoto,
+};

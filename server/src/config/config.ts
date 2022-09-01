@@ -26,6 +26,14 @@ class SedoConfig {
     static get TokenKey(): string {
         return process.env.TokenKey || 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY0NDE1NDU5OSwiaWF0IjoxNjQ0MTU0NTk5fQ.tiOEiSu9KTYMeZ3FPQZHBXvgSRfrKdeXir8rEilZCkQ';
     }
+
+    static get AccessTokenExpiresIn(): string {
+        return process.env.AccessTokenExpiresIn || '2h';
+    }
+
+    static get AccessTokenExpiresInSeconds(): string {
+        return process.env.AccessTokenExpiresIn || '7200';
+    }
 }
 
 export default SedoConfig;
