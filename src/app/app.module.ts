@@ -42,6 +42,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
+import { AddPostComponent } from './layouts/add-post/add-post.component';
+import { AddPostFormComponent } from './views/add-post-form/add-post-form.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,8 @@ import { AlertComponent } from './components/alert/alert.component';
     JobSuggestionsComponent,
     JobComponent,
     AlertComponent,
+    AddPostComponent,
+    AddPostFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +89,7 @@ import { AlertComponent } from './components/alert/alert.component';
     NgxGalleryModule,
     ScrollingModule,
     HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
