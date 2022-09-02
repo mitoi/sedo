@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class ToolbarComponent implements OnInit {
   loggedIn: any;
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,9 @@ export class ToolbarComponent implements OnInit {
     this.accountService.logout(true);
   }
 
-  addPost(): void {}
+  addPost(): void {
+    this.router.navigate(['add_post']);
+  }
   addDonation(): void {}
   goToSettings(): void {}
 }
