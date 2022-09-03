@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
-import {User} from '../models/user';
+import {User} from '../../models/user';
 import * as bcryptjs from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import SedoConfig from '../config/config';
+import SedoConfig from '../../config/config';
 
 const register = async (req: Request, res: Response) => {
     try {
@@ -37,7 +37,7 @@ const register = async (req: Request, res: Response) => {
             return res.status(500).send('Eroare la inregistrare. Incearca din nou.');
         }
 
-        const user = await User.create({
+        await User.create({
             firstName,
             lastName,
             phone,
@@ -49,21 +49,10 @@ const register = async (req: Request, res: Response) => {
             password: encryptedPass,
         });
 
-        const token: string = jwt.sign(
-            {
-                // eslint-disable-next-line camelcase
-                user_id: user.id,
-                email,
-            },
-            SedoConfig.TokenKey,
-            {
-                expiresIn: '2h',
-            },
-        );
-
-        user.token = token;
-
-        res.status(201).json(user);
+        res.status(201).json({
+            error: false,
+            message: 'User created succfully.',
+        });
     } catch (err) {
         console.log(err);
     }

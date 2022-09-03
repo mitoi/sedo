@@ -29,7 +29,10 @@ const jwtValidator = async (req: Request, res: Response, next: NextFunction) => 
             return res.sendStatus(403);
         }
     } else {
-        res.status(401).send('Utilizatorul nu este autorizat.');
+        res.status(401).json({
+            error: true,
+            message: 'User is not authorized.',
+        });
     }
 };
 
