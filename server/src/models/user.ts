@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model, ObjectId} from 'mongoose';
 
 interface UserType {
   firstName: string;
@@ -12,6 +12,8 @@ interface UserType {
   password: string;
   token: string;
   expiresIn: string;
+  refreshToken: string;
+  id: ObjectId;
 }
 
 const userSchema = new Schema<UserType>({
@@ -31,4 +33,5 @@ const User = model<UserType>('user', userSchema);
 
 export {
     User,
+    UserType,
 };
