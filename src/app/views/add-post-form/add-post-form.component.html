@@ -1,58 +1,67 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-6/12 ml-6">
-  <h1 class="ml-6">Adauga Anunt</h1>
-  <!--Title-->
-  <mat-form-field appearance="outline">
-    <mat-label>Titlu</mat-label>
-    <input matInput formControlName="title" placeholder="Titlu">
-    <mat-hint>Adauga un titlu pentru postarea ta</mat-hint>
-  </mat-form-field>
-  <!--Description-->
-  <mat-form-field appearance="outline">
-    <mat-label>Descriere</mat-label>
-    <textarea matInput formControlName="description"></textarea>
-    <mat-hint>Spune ce doresti sa obtii de la aceasta postare.</mat-hint>
-  </mat-form-field>
-  <!--Price-->
-  <mat-form-field appearance="outline">
-    <mat-label>Pret</mat-label>
-    <input matInput formControlName="price" />
-  </mat-form-field>
-  <!--Category-->
-  <mat-form-field appearance="outline">
-    <mat-label>Categorie</mat-label>
-    <mat-select formControlName="category">
-      <mat-option *ngFor="let item of categories" value="item">{{CategoryMapping[item]}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <!--Image selector-->
-  <mat-form-field appearance="outline">
-    <div>
-      <mat-toolbar>
-        <input
-          matInput readonly="true"
-          [value]="'Selecteaza Imagini'"
-        />
-      </mat-toolbar>
+    <h1 class="ml-6">Adauga Anunt</h1>
+    <!--Title-->
+    <mat-form-field appearance="outline">
+        <mat-label>Titlu</mat-label>
+        <input matInput formControlName="title" placeholder="Titlu" />
+        <mat-hint>Adauga un titlu pentru postarea ta</mat-hint>
+    </mat-form-field>
+    <!--Description-->
+    <mat-form-field appearance="outline">
+        <mat-label>Descriere</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-hint>Spune ce doresti sa obtii de la aceasta postare.</mat-hint>
+    </mat-form-field>
+    <!--Price-->
+    <mat-form-field appearance="outline">
+        <mat-label>Pret</mat-label>
+        <input matInput formControlName="price" />
+    </mat-form-field>
+    <!--Location-->
+    <mat-form-field appearance="outline">
+        <mat-label>Locatie</mat-label>
+        <input matInput formControlName="location" />
+        <mat-hint>Unde va fi efectuat serviciul</mat-hint>
+    </mat-form-field>
+    <!--Category-->
+    <mat-form-field appearance="outline">
+        <mat-label>Categorie</mat-label>
+        <mat-select formControlName="category">
+            <mat-option *ngFor="let item of categories" value="item">{{
+                CategoryMapping[item]
+            }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!--Image selector-->
+    <mat-form-field appearance="outline">
+        <div>
+            <mat-toolbar>
+                <input
+                    matInput
+                    readonly="true"
+                    [value]="'Selecteaza Imagini'"
+                />
+            </mat-toolbar>
 
-      <input
-        type="file"
-        id="fileInput"
-        name="fileInput"
-        accept="image/*"
-        multiple
-        (change)="selectFiles($event)"
-      />
-    </div>
-  </mat-form-field>
+            <input
+                type="file"
+                id="fileInput"
+                name="fileInput"
+                accept="image/*"
+                multiple
+                (change)="selectFiles($event)"
+            />
+        </div>
+    </mat-form-field>
 
-  <!--Image previews-->
-  <table>
-    <tr>
-      <td *ngFor="let preview of previews">
-        <img [src]="preview" class="preview" />
-      </td>
-    </tr>
-  </table>
+    <!--Image previews-->
+    <table>
+        <tr>
+            <td *ngFor="let preview of previews">
+                <img [src]="preview" class="preview" />
+            </td>
+        </tr>
+    </table>
 
-  <button mat-stroked-button type="submit">Salvare</button>
+    <button mat-stroked-button type="submit">Salvare</button>
 </form>
