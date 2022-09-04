@@ -8,6 +8,7 @@ import { RegisterComponent } from './layouts/register/register.component';
 import {ItemComponent} from "./views/item/item.component";
 import { AuthGuard } from './helpers/auth.guard';
 import { AddPostComponent } from './layouts/add-post/add-post.component';
+import { SettingsComponent } from './layouts/settings/settings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'item/:id', component: JobComponent},
   { path: 'add_post', component: AddPostComponent, canActivate: [AuthGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -5,7 +5,6 @@ import { map, shareReplay, first } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { SedoService } from '../../services/sedo.service';
 import { AccountService } from 'src/app/services/account.service';
-import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private breakpointObserver: BreakpointObserver, 
     private authService: AccountService,
-    private alertService: AlertService,
     private router: Router,
     private route: ActivatedRoute,
     private sedoService: SedoService, private _formBuilder: FormBuilder) { }
@@ -58,7 +56,6 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     // reset alerts on submit
-    this.alertService.clear();
 
     this.authService.login(this.loginForm.controls['usernameCtrl'].value, this.loginForm.controls['passwordCtrl'].value)
             .pipe(first())
@@ -69,7 +66,6 @@ export class LoginComponent implements OnInit {
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
-                    this.alertService.error(error.error);
                     this.loading = false;
                 }
             });

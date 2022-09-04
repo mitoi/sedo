@@ -9,9 +9,19 @@ import { JobPosting } from '../model/JobPosting';
 })
 
 export class PostService {
-    private baseUrl = 'http://localhost:8080';
-
     constructor(private http: HttpClient) {}
 
-    createPost(post: any) {}
+    createPost(post: any): Observable<HttpEvent<any>>{
+        const req = new HttpRequest(
+            'POST',
+            `${environment.apiUrl}//v1/post`,
+            post,
+            {
+                reportProgress: true,
+                responseType: 'json',
+            }
+        );
+
+        return this.http.request(req);;
+    }
 }

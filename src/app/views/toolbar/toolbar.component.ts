@@ -28,5 +28,7 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['add_post']);
   }
   addDonation(): void {}
-  goToSettings(): void {}
+  goToSettings(): void {
+    this.router.navigate(['settings']);
+  }
 }

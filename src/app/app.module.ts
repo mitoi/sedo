@@ -41,11 +41,17 @@ import { JobComponent } from './layouts/job/job.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
 import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './components/alert/alert.component';
 import { AddPostComponent } from './layouts/add-post/add-post.component';
 import { AddPostFormComponent } from './views/add-post-form/add-post-form.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SettingsComponent } from './layouts/settings/settings.component';
+import { UserInfoComponent } from './views/user-info/user-info.component';
+import { UserDataComponent } from './components/user-data/user-data.component';
+import { UserPostsComponent } from './components/user-posts/user-posts.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,9 +69,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ItemComponent,
     JobSuggestionsComponent,
     JobComponent,
-    AlertComponent,
     AddPostComponent,
     AddPostFormComponent,
+    SettingsComponent,
+    UserInfoComponent,
+    UserDataComponent,
+    UserPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +98,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     NgxGalleryModule,
     ScrollingModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

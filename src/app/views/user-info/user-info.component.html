@@ -1,0 +1,27 @@
+
+<mat-accordion class="headers-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Date Personale </mat-panel-title>
+            <mat-panel-description>
+                Nume, nr de telefon, email
+                <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+       <app-user-data></app-user-data>
+    </mat-expansion-panel>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title> Anunturile tale </mat-panel-title>
+            <mat-panel-description>
+                Anunturi postate de tine
+                <mat-icon>date_range</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-user-posts></app-user-posts>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-expansion-panel>
+</mat-accordion>
