@@ -21,70 +21,87 @@ const login = async (req: Request, res: Response) => {
 
         const user = await User.findOne({email});
 
-        if (user && (await bcryptjs.compare(password, user.password))) {
-            const accessToken: string = jwt.sign(
-                {
-                    // eslint-disable-next-line camelcase
-                    user_id: user.id,
-                    email,
-                },
-                SedoConfig.TokenKey,
-                {
-                    expiresIn: SedoConfig.AccessTokenExpiresIn,
-                },
-            );
-
-            const refreshToken: string = jwt.sign(
-                {
-                    // eslint-disable-next-line camelcase
-                    user_id: user.id,
-                    email,
-                },
-                SedoConfig.RefreshTokenKey,
-                {
-                    expiresIn: SedoConfig.RefreshTokenExpiresIn,
-                },
-            );
-
-            const userTokenRecord: UserTokenType|null = await UserToken.findOne({
-                userId: user.id,
+        if (!user) {
+            res.status(400).json({
+                error: true,
+                message: 'Invalid credentials',
             });
 
-            if (userTokenRecord) {
-                await UserToken.findOneAndDelete({
-                    userId: user.id,
-                });
-            }
-
-            await UserToken.create({
-                userId: user.id,
-                token: refreshToken,
-            });
-
-            const userMeta = {
-                firstName: user.firstName,
-                lastName: user.lastName,
-                phone: user.phone,
-                profilePic: user.profilePic,
-                skills: user.skills,
-                email: user.email,
-                type: user.type,
-                rating: user.rating,
-                id: user.id,
-                expiresIn: SedoConfig.AccessTokenExpiresInSeconds,
-                password: '',
-                token: accessToken,
-                refreshToken,
-            };
-
-            res.status(200).json(userMeta);
             return;
         }
 
-        return res.status(400).json({
-            error: true,
-            message: 'Invalid credentials',
+        const isPasswordValid = await bcryptjs.compare(password, user.password);
+
+        if (!isPasswordValid) {
+            res.status(400).json({
+                error: true,
+                message: 'Invalid credentials',
+            });
+
+            return;
+        }
+
+        const accessToken: string = jwt.sign(
+            {
+                // eslint-disable-next-line camelcase
+                user_id: user.id,
+                email,
+            },
+            SedoConfig.TokenKey,
+            {
+                expiresIn: SedoConfig.AccessTokenExpiresIn,
+            },
+        );
+
+        const refreshToken: string = jwt.sign(
+            {
+                // eslint-disable-next-line camelcase
+                user_id: user.id,
+                email,
+            },
+            SedoConfig.RefreshTokenKey,
+            {
+                expiresIn: SedoConfig.RefreshTokenExpiresIn,
+            },
+        );
+
+        const userTokenRecord: UserTokenType|null = await UserToken.findOne({
+            userId: user.id,
         });
+
+        if (userTokenRecord) {
+            await UserToken.findOneAndDelete({
+                userId: user.id,
+            });
+        }
+
+        await UserToken.create({
+            userId: user.id,
+            token: refreshToken,
+        });
+
+        const userMeta = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phone: user.phone,
+            profilePic: user.profilePic,
+            skills: user.skills,
+            email: user.email,
+            type: user.type,
+            rating: user.rating,
+            id: user.id,
+            expiresIn: SedoConfig.AccessTokenExpiresInSeconds,
+            password: '',
+            token: accessToken,
+            refreshToken,
+        };
+
+        res.status(200).json({
+            error: false,
+            user: userMeta,
+        });
+
+        return;
     } catch (err) {
         console.log(err);
     }

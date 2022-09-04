@@ -19,7 +19,6 @@ const logout = async (req: Request, res: Response) => {
         });
 
         if (!userToken) {
-            console.log('tkoen nof tound')
             res.status(200).json({
                 error: false,
                 message: 'Logged Out Successfully',

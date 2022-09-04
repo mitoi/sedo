@@ -14,14 +14,14 @@ const refreshUserToken = async (req: Request, res: Response) => {
         if (!refreshToken) {
             return res.status(400).json({
                 error: true,
-                message: 'refreshToken parameter is mandatory.',
+                message: 'refreshToken parameter is missing.',
             });
         }
 
         if (!_.isString(refreshToken)) {
             return res.status(400).json({
                 error: true,
-                message: 'refreshToken should be string',
+                message: 'refreshToken should be string.',
             });
         }
 
@@ -75,7 +75,7 @@ const refreshUserToken = async (req: Request, res: Response) => {
         res.status(201).json({
             error: false,
             accessToken,
-            message: 'Access token created successfully',
+            message: 'Access token created successfully.',
         });
     } catch (err) {
         if (err instanceof jwt.JsonWebTokenError) {
