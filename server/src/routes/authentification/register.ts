@@ -21,20 +21,31 @@ const register = async (req: Request, res: Response) => {
 
         if (!(firstName && lastName && phone
             && email && type && password)) {
-            return res.status(400).send('Toate campurile sunt obligatorii');
+            return res.status(400).json({
+                error: true,
+                message: 'Missing fields. Required fields: firstName, lastName, phone, email, type, passsword.',
+            });
         }
 
         const userExists = await User.findOne({email});
 
         if (userExists) {
-            return res.status(409).send('Utilizatoru exista deja');
+            res.status(409).json({
+                error: true,
+                message: 'User already exists.',
+            });
+
+            return;
         }
 
         let encryptedPass: string;
         try {
             encryptedPass = await bcryptjs.hash(password, SALT);
         } catch (error) {
-            return res.status(500).send('Eroare la inregistrare. Incearca din nou.');
+            return res.status(500).send({
+                error: true,
+                message: 'Unable to register the user, please try again later.',
+            });
         }
 
         await User.create({
@@ -51,7 +62,7 @@ const register = async (req: Request, res: Response) => {
 
         res.status(201).json({
             error: false,
-            message: 'User created succfully.',
+            message: 'User created successfully.',
         });
     } catch (err) {
         console.log(err);

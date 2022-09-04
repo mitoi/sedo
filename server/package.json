@@ -4,7 +4,8 @@
   "description": "Sedo server",
   "main": "src/index.ts",
   "scripts": {
-    "sedo": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+    "sedo": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts",
+    "test": "jest"
   },
   "keywords": [
     "jwt",
@@ -34,6 +35,8 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
+    "@types/jest": "^29.0.0",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
     "eslint": "^7.32.0",
@@ -45,6 +48,9 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "nodemon": "^2.0.12",
+    "superagent": "^8.0.0",
+    "supertest": "^6.2.4",
+    "ts-jest": "^28.0.8",
     "ts-node": "^10.2.1",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.2"

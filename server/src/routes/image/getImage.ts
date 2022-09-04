@@ -6,7 +6,10 @@ const getImage = async (req: Request, res: Response) => {
     const {id} = req.query;
 
     if (!id || !_.isString(id)) {
-        res.status(422).json({mesaj: 'Este necesar un id valid.'});
+        res.status(422).json({
+            error: true,
+            message: `'id' is required.`,
+        });
 
         return;
     }
@@ -14,16 +17,22 @@ const getImage = async (req: Request, res: Response) => {
     const record: ImageType|null = await Image.findById(id);
 
     if (!record) {
-        res.status(422).json({mesaj: `Resursa pentru ${id} nu a putut fi gasita.`});
+        res.status(422).json({
+            error: true,
+            message: `Resource not found, resource id: ${id}.`
+        });
 
         return;
     }
 
-    const {data} = record.image;
-    const {contentType} = record.image;
+    const {data, contentType} = record.image;
+
     if (data && contentType) {
-        res.type(contentType).send(
-            `data:${contentType};base64,${Buffer.from(data).toString('base64')}`,
+        res.type(contentType).json(
+            {
+                error: false,
+                data: `data:${contentType};base64,${Buffer.from(data).toString('base64')}`
+            },
         );
     }
 };

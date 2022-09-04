@@ -7,7 +7,10 @@ const uploadPhoto = async (req: Request, res: Response) => {
     const {file} = req;
 
     if (!file) {
-        res.status(422);
+        res.status(422).json({
+            error: true,
+            message: `File is missing.`,
+        });
 
         return;
     }
@@ -42,7 +45,10 @@ const uploadPhoto = async (req: Request, res: Response) => {
 
     const {id} = record;
     // res.status(201).json(image);
-    res.status(201).json({id});
+    res.status(201).json({
+        error: false,
+        imageId: id,
+    });
 };
 
 export {
