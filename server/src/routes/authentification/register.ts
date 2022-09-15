@@ -1,8 +1,6 @@
 import {Request, Response} from 'express';
 import {User} from '../../models/user';
 import * as bcryptjs from 'bcryptjs';
-import * as jwt from 'jsonwebtoken';
-import SedoConfig from '../../config/config';
 
 const register = async (req: Request, res: Response) => {
     try {
@@ -44,7 +42,7 @@ const register = async (req: Request, res: Response) => {
         } catch (error) {
             return res.status(500).send({
                 error: true,
-                message: 'Unable to register the user, please try again later.',
+                message: 'Something went wrong, we were unable to register the user. Please try again later.',
             });
         }
 
