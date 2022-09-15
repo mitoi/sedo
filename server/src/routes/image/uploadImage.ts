@@ -38,13 +38,16 @@ const uploadPhoto = async (req: Request, res: Response) => {
     const record = await Image.create(img);
 
     if (!record) {
-        res.status(500).send('Nu sa putut stoca imaginea');
+        res.status(500).json({
+            error: true,
+            message: 'Something went wrong, we were unable to save the image.',
+        });
 
         return;
     }
 
     const {id} = record;
-    // res.status(201).json(image);
+
     res.status(201).json({
         error: false,
         imageId: id,

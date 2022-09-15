@@ -1,28 +1,40 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model, ObjectId} from 'mongoose';
+
+interface Photo {
+  id: string;
+  positionIndex: string;
+};
 
 interface AdType {
-  name: string;
+  title: string;
   description: string;
-  photo: string;
-  userId: string;
-  skills: string[];
-  email: string;
+  photos: Photo[]|undefined;
+  userId: ObjectId;
   type: string;
-  rating: string;
-  password: string;
-  token: string;
-}
+  category: string;
+  price: string;
+};
 
 const adSchema = new Schema<AdType>({
-    name: {type: String},
+    title: {type: String},
     description: {type: String},
-    photo: {type: String},
-    userId: {type: String},
-    token: {type: String},
+    photos: [{
+      type: Object,
+    }],
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
+    type: {
+      type: String,
+    },
+    category: String,
+    price: String
 });
 
-const User = model<AdType>('ad', adSchema);
+const Ad = model<AdType>('ad', adSchema);
 
 export {
-    User,
+  Ad,
+  AdType,
 };

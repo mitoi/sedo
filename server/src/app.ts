@@ -8,6 +8,9 @@ import {getImage} from './routes/image/getImage';
 import {jwtValidator} from './utils/jwtValidator';
 import {logout} from './routes/authentification/logout';
 import {refreshUserToken} from './routes/authentification/refreshToken';
+import {createAd} from './routes/ads/createAd';
+import {getAd} from './routes/ads/getAd';
+import {deleteAd} from './routes/ads/deleteAd';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -26,6 +29,10 @@ app.post('/v1/register', register);
 app.post('/v1/login', login);
 app.post('/v1/generateNewToken', refreshUserToken);
 app.delete('/v1/logout', logout);
+
+app.post('/v1/ad', jwtValidator, createAd);
+app.get('/v1/ad', jwtValidator, getAd);
+app.delete('/v1/ad', jwtValidator, deleteAd);
 
 app.get('/v1/getImage', jwtValidator, getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);

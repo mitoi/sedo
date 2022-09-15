@@ -11,6 +11,7 @@ const uploadFile = multer.diskStorage({
         callback(null, uploadDirPath);
     },
     filename: (req: Request, file: Express.Multer.File, callback: FileNameCallback): void => {
+        //todo: generate mongoId
         callback(null, `${file.originalname}-${Date.now()}.png`);
     },
 });
