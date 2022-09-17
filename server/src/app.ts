@@ -13,6 +13,7 @@ import {getAd} from './routes/ads/getAd';
 import {deleteAd} from './routes/ads/deleteAd';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import {getAds} from './routes/ads/getAds';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -47,6 +48,7 @@ app.post('/v1/login', apiLimiter, login);
 app.post('/v1/generateNewToken', refreshUserToken);
 app.delete('/v1/logout', logout);
 
+app.get('/v1/ad/list', jwtValidator, getAds);
 app.post('/v1/ad', jwtValidator, createAd);
 app.get('/v1/ad', jwtValidator, getAd);
 app.delete('/v1/ad', jwtValidator, deleteAd);

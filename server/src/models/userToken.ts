@@ -21,6 +21,16 @@ const userTokenSchema = new Schema<UserTokenType>({
         default: Date.now,
         expires: 30 * 86400, // 30 days
     },
+},
+{
+    timestamps: {
+        updatedAt: 'updatedAt',
+    },
+});
+
+userTokenSchema.pre('save', function (next) {
+    this.updatedAt = Date.now();
+    next();
 });
 
 const UserToken = model('UserToken', userTokenSchema);

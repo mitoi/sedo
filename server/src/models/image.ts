@@ -18,6 +18,17 @@ const adSchema = new Schema<ImageType>({
         path: String,
         contentType: String,
     },
+},
+{
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
+    },
+});
+
+adSchema.pre('save', function (next) {
+    this.updatedAt = Date.now();
+    next();
 });
 
 const Image = model<ImageType>('image', adSchema);
