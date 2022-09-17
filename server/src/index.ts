@@ -15,13 +15,13 @@ const mongo = () => {
     mongoose.connection.on('error', (err: any) => {
         console.log('Mongoose default connection error: ' + err);
     });
-}
+};
 
 const startListening = () => {
     app.listen(SedoConfig.ExpressPort, ():void => {
         console.log(`Sedo listening at https://localhost:${SedoConfig.ExpressPort}`);
     });
-}
+};
 
 mongo();
 startListening();

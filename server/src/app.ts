@@ -11,6 +11,8 @@ import {refreshUserToken} from './routes/authentification/refreshToken';
 import {createAd} from './routes/ads/createAd';
 import {getAd} from './routes/ads/getAd';
 import {deleteAd} from './routes/ads/deleteAd';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -19,6 +21,21 @@ const options: cors.CorsOptions = {
     origin: allowedOrigins,
 };
 
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 100, // 15 minutes
+    max: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+app.use(helmet());
+app.use(helmet.noSniff()); // prevents MIME type sniffing.
+app.use(helmet.ieNoOpen()); // specific to the vulnerabilities in IE 8 and forces potentially unsafe downloads to be saved and prevents the execution of HTML in your site’s context.
+app.use(helmet.referrerPolicy({ // controls the information inside the Referer header.
+    policy: ['origin', 'unsafe-url'],
+}));
+app.use(helmet.xssFilter()); // prevents cross-site scripting.
+
 app.use(cors(options));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -26,7 +43,7 @@ app.use(express.json());
 app.use('/resources', [jwtValidator, express.static(`${__dirname}/upload`)]);
 
 app.post('/v1/register', register);
-app.post('/v1/login', login);
+app.post('/v1/login', apiLimiter, login);
 app.post('/v1/generateNewToken', refreshUserToken);
 app.delete('/v1/logout', logout);
 
