@@ -1,15 +1,15 @@
 import {Request, Response} from 'express';
 import _ from 'lodash';
 import {Ad, AdType} from '../../models/ad';
-import {Types, Error} from 'mongoose';
+import {Types} from 'mongoose';
 
 const getAd = async (req: Request, res: Response) => {
     const {id} = req.query;
 
-    if (!id|| !_.isString(id)) {
+    if (!id || !_.isString(id)) {
         res.status(422).json({
             error: true,
-            message: `Id is missing.`,
+            message: 'Id is missing.',
         });
 
         return;
@@ -29,7 +29,7 @@ const getAd = async (req: Request, res: Response) => {
     if (!record) {
         res.status(404).json({
             error: true,
-            message: `Resource not found, resource id: ${id}.`
+            message: `Resource not found, resource id: ${id}.`,
         });
 
         return;
@@ -37,7 +37,7 @@ const getAd = async (req: Request, res: Response) => {
 
     res.status(200).json({
         error: false,
-        record
+        record,
     });
 };
 

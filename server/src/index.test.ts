@@ -1,7 +1,7 @@
-import request from "supertest";
-import app from "./app";
+import request from 'supertest';
+import app from './app';
 
-describe("Test the middleware for authentification", () => {
+describe('Test the middleware for authentification', () => {
     test('It should respond that user is not authorized', async () => {
         const res = await request(app).get('/v1/getImage');
 
@@ -11,5 +11,5 @@ describe("Test the middleware for authentification", () => {
             error: true,
             message: 'User is not authorized.',
         });
-    })
+    });
 });
