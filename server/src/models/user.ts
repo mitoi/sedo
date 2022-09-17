@@ -27,6 +27,17 @@ const userSchema = new Schema<UserType>({
     rating: {type: String},
     password: {type: String},
     token: {type: String},
+},
+{
+    timestamps: {
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
+    },
+});
+
+userSchema.pre('save', function (next) {
+    this.updatedAt = Date.now();
+    next();
 });
 
 const User = model<UserType>('user', userSchema);
