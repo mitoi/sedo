@@ -1,17 +1,17 @@
-import request from "supertest";
-import app from "./../../app";
+import request from 'supertest';
+import app from './../../app';
 import {User} from '../../models/user';
 import {UserToken} from '../../models/userToken';
 import * as bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import SedoConfig from "../../config/config";
+import SedoConfig from '../../config/config';
 
-describe("Test Login", () => {
+describe('Test Login', () => {
     test('It should respond credentials are mandatory', async () => {
         const res = await request(app)
-                .post('/v1/login')
-                .send({test: "lalal"})
-                .expect(400);
+            .post('/v1/login')
+            .send({test: 'lalal'})
+            .expect(400);
 
         expect(res.body.error).toBe(true);
         expect(res.body.message).toBe('email/password are mandatory');
@@ -27,12 +27,12 @@ describe("Test Login", () => {
         jest.spyOn(jwt, 'sign').mockReturnValue('token' as any);
 
         const res = await request(app)
-                .post('/v1/login')
-                .send({
-                    email: 'gigel',
-                    password: "lalal"
-                })
-                .expect(400);
+            .post('/v1/login')
+            .send({
+                email: 'gigel',
+                password: 'lalal',
+            })
+            .expect(400);
 
         expect(res.body.error).toBe(true);
         expect(res.body.message).toBe('Invalid credentials');
@@ -53,17 +53,17 @@ describe("Test Login", () => {
             email: 'email',
             type: 'type',
             rating: 'rating',
-            password: password,
+            password,
             id: 'id',
         } as any);
 
         const res = await request(app)
-                .post('/v1/login')
-                .send({
-                    email: 'gigel',
-                    password: "password"
-                })
-                .expect(200);
+            .post('/v1/login')
+            .send({
+                email: 'gigel',
+                password: 'password',
+            })
+            .expect(200);
 
         const expectedUser = {
             firstName: 'firstName',
@@ -84,6 +84,4 @@ describe("Test Login", () => {
         expect(res.body.error).toBe(false);
         expect(res.body.user).toStrictEqual(expectedUser);
     });
-
-
 });
