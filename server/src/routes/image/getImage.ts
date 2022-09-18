@@ -8,7 +8,7 @@ const getImage = async (req: Request, res: Response) => {
     if (!id || !_.isString(id)) {
         res.status(422).json({
             error: true,
-            message: `'id' is required.`,
+            message: '\'id\' is required.',
         });
 
         return;
@@ -19,7 +19,7 @@ const getImage = async (req: Request, res: Response) => {
     if (!record) {
         res.status(422).json({
             error: true,
-            message: `Resource not found, resource id: ${id}.`
+            message: `Resource not found, resource id: ${id}.`,
         });
 
         return;
@@ -31,7 +31,7 @@ const getImage = async (req: Request, res: Response) => {
         res.type(contentType).json(
             {
                 error: false,
-                data: `data:${contentType};base64,${Buffer.from(data).toString('base64')}`
+                data: `data:${contentType};base64,${Buffer.from(data).toString('base64')}`,
             },
         );
     }

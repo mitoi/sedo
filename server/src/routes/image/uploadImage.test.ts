@@ -12,12 +12,12 @@ describe('Test create image', () => {
         } as any);
 
         const res = await request(app)
-                .post('/v1/upload/photo')
-                .set({'authorization': 'test 123'})
-                .expect(422);
+            .post('/v1/upload/photo')
+            .set({authorization: 'test 123'})
+            .expect(422);
 
         expect(res.body.error).toBe(true);
-        expect(res.body.message).toBe(`File is missing.`);
+        expect(res.body.message).toBe('File is missing.');
     });
 
     test('Get image', async () => {
@@ -31,15 +31,15 @@ describe('Test create image', () => {
         const buffer = Buffer.from('test data');
 
         const result = await request(app)
-                .post('/v1/upload/photo')
-                .set({'authorization': 'test 123'})
-                .attach('image', buffer, 'testJestImageToBeDeleted.png')
-                .expect(201);
+            .post('/v1/upload/photo')
+            .set({authorization: 'test 123'})
+            .attach('image', buffer, 'testJestImageToBeDeleted.png')
+            .expect(201);
 
-        //cleanup
+        // cleanup
         const files = readdirSync(path.join(__dirname, '../../upload/images'));
 
-        for(let i = 0; i < files.length; i++) {
+        for (let i = 0; i < files.length; i++) {
             if (files[i].startsWith('testJestImageToBeDeleted')) {
                 unlinkSync(path.join(__dirname, '../../upload/images', files[i]));
             }

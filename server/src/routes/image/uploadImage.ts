@@ -9,7 +9,7 @@ const uploadPhoto = async (req: Request, res: Response) => {
     if (!file) {
         res.status(422).json({
             error: true,
-            message: `File is missing.`,
+            message: 'File is missing.',
         });
 
         return;
@@ -20,7 +20,7 @@ const uploadPhoto = async (req: Request, res: Response) => {
     const basePath: string = path.join(__dirname, '../../upload/images/');
     const filePath = `${basePath}${file.filename}`;
 
-    const name: string = req?.body?.name || 'LipsaNume';
+    const name: string = req?.body?.name || 'NoName';
 
     const imageBuffer: Buffer | null = saveImageContentDb ? fs.readFileSync(filePath) : null;
 

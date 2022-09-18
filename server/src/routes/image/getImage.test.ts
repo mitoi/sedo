@@ -10,12 +10,12 @@ describe('Test get image', () => {
         } as any);
 
         const res = await request(app)
-                .get('/v1/getImage')
-                .set({'authorization': 'test 123'})
-                .expect(422);
+            .get('/v1/getImage')
+            .set({authorization: 'test 123'})
+            .expect(422);
 
         expect(res.body.error).toBe(true);
-        expect(res.body.message).toBe(`'id' is required.`);
+        expect(res.body.message).toBe('\'id\' is required.');
     });
 
     test('Get image', async () => {
@@ -30,11 +30,11 @@ describe('Test get image', () => {
         } as any);
 
         await request(app)
-                .get('/v1/getImage')
-                .set({'authorization': 'test 123'})
-                .query({
-                    id: '312312',
-                })
-                .expect(200);
+            .get('/v1/getImage')
+            .set({authorization: 'test 123'})
+            .query({
+                id: '312312',
+            })
+            .expect(200);
     });
 });

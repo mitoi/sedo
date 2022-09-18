@@ -1,21 +1,21 @@
 import request from 'supertest';
-import app from "./../../app";
+import app from '../../app';
 import {User} from '../../models/user';
 import bcrypt from 'bcryptjs';
 
 describe('Test User Register', () => {
     test('It should respond missing param', async () => {
         const res = await request(app)
-                .post('/v1/register')
-                .send({
-                    firstName: 'johnny',
-                    lastName: 'marinas',
-                })
-                .expect(400);
+            .post('/v1/register')
+            .send({
+                firstName: 'johnny',
+                lastName: 'marinas',
+            })
+            .expect(400);
 
         expect(res.body.error).toBe(true);
         expect(res.body.message).toBe(
-            'Missing fields. Required fields: firstName, lastName, phone, email, type, passsword.'
+            'Missing fields. Required fields: firstName, lastName, phone, email, type, passsword.',
         );
     });
 
@@ -25,16 +25,16 @@ describe('Test User Register', () => {
         } as any);
 
         const res = await request(app)
-                .post('/v1/register')
-                .send({
-                    firstName: 'johnny',
-                    lastName: 'marinas',
-                    phone: '1231321',
-                    email: 'gigel@gmail.com',
-                    type: 'normal',
-                    password: '123',
-                })
-                .expect(409);
+            .post('/v1/register')
+            .send({
+                firstName: 'johnny',
+                lastName: 'marinas',
+                phone: '1231321',
+                email: 'gigel@gmail.com',
+                type: 'normal',
+                password: '123',
+            })
+            .expect(409);
 
         expect(res.body.error).toBe(true);
         expect(res.body.message).toBe('User already exists.');
@@ -46,16 +46,16 @@ describe('Test User Register', () => {
         jest.spyOn(User, 'create').mockReturnValue(null as any);
 
         const res = await request(app)
-                .post('/v1/register')
-                .send({
-                    firstName: 'johnny',
-                    lastName: 'marinas',
-                    phone: '1231321',
-                    email: 'gigel@gmail.com',
-                    type: 'normal',
-                    password: '123',
-                })
-                .expect(201);
+            .post('/v1/register')
+            .send({
+                firstName: 'johnny',
+                lastName: 'marinas',
+                phone: '1231321',
+                email: 'gigel@gmail.com',
+                type: 'normal',
+                password: '123',
+            })
+            .expect(201);
 
         expect(res.body.error).toBe(false);
         expect(res.body.message).toStrictEqual('User created successfully.');

@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from "./../../app";
+import app from './../../app';
 import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
 
@@ -11,7 +11,7 @@ describe('Test Create Ad', () => {
 
         const resp = await request(app)
             .post('/v1/ad')
-            .set({'authorization': 'test 123'})
+            .set({authorization: 'test 123'})
             .send({
                 title: 'test',
                 description: 'test description',
@@ -34,7 +34,7 @@ describe('Test Create Ad', () => {
 
         const resp = await request(app)
             .post('/v1/ad')
-            .set({'authorization': 'test 123'})
+            .set({authorization: 'test 123'})
             .send({
                 title: 'test',
                 description: 'test description',

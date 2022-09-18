@@ -1,5 +1,5 @@
 import express, {Application} from 'express';
-import {register} from './routes/authentification/register';
+import {register} from './routes/user/register';
 import {login} from './routes/authentification/login';
 import {uploadPhoto} from './routes/image/uploadImage';
 import cors from 'cors';
@@ -14,6 +14,8 @@ import {deleteAd} from './routes/ads/deleteAd';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import {getAds} from './routes/ads/getAds';
+import {getUserInfo} from './routes/user/getUserInfo';
+import {updateUserInfo} from './routes/user/updateUserInfo';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -47,6 +49,9 @@ app.post('/v1/register', register);
 app.post('/v1/login', apiLimiter, login);
 app.post('/v1/generateNewToken', refreshUserToken);
 app.delete('/v1/logout', logout);
+
+app.get('/v1/user/:id', jwtValidator, getUserInfo);
+app.put('/v1/user/:id', jwtValidator, updateUserInfo);
 
 app.get('/v1/ad/list', jwtValidator, getAds);
 app.post('/v1/ad', jwtValidator, createAd);

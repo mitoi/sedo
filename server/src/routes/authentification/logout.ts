@@ -34,7 +34,7 @@ const logout = async (req: Request, res: Response) => {
             message: 'Logged Out Successfully',
         });
     } catch (err) {
-        //todo handle the error better
+        // todo handle the error better
         res.status(500).json({
             error: true,
             message: 'Internal Server Error',
