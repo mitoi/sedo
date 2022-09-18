@@ -14,7 +14,7 @@ export class PostService {
     createPost(post: any): Observable<HttpEvent<any>>{
         const req = new HttpRequest(
             'POST',
-            `${environment.apiUrl}//v1/post`,
+            `${environment.apiUrl}/v1/post`,
             post,
             {
                 reportProgress: true,

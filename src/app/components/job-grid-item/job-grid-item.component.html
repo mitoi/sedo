@@ -1,4 +1,4 @@
-<mat-card class="mat-elevation-z5" (click)="onClickItem()">
+<mat-card class="mat-elevation-z5 post" (click)="onClickItem()">
     <mat-card-title-group>
         <mat-card-title>{{model.title}}</mat-card-title>
         <mat-card-subtitle>{{model.user.firstName}} {{model.user.lastName}} - {{model.date | date}}</mat-card-subtitle>
@@ -9,6 +9,6 @@
     </mat-card-content>
     <mat-card-actions>
         <!-- show this only if logged in as a user -->
-        <button mat-button>Aplica</button>
+        <button mat-stroked-button>Aplica</button>
     </mat-card-actions>
 </mat-card>
