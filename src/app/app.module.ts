@@ -40,7 +40,7 @@ import { JobSuggestionsComponent } from './views/job-suggestions/job-suggestions
 import { JobComponent } from './layouts/job/job.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AddPostComponent } from './layouts/add-post/add-post.component';
 import { AddPostFormComponent } from './views/add-post-form/add-post-form.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -52,6 +52,11 @@ import { UserPostsComponent } from './components/user-posts/user-posts.component
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -104,7 +109,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

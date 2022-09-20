@@ -14,8 +14,21 @@ export class PostService {
     createPost(post: any): Observable<HttpEvent<any>>{
         const req = new HttpRequest(
             'POST',
-            `${environment.apiUrl}/v1/post`,
+            `${environment.apiUrl}/ad`,
             post,
+            {
+                reportProgress: true,
+                responseType: 'json',
+            }
+        );
+
+        return this.http.request(req);;
+    }
+
+    getPost(id: string): Observable<HttpEvent<any>>{
+        const req = new HttpRequest(
+            'GET',
+            `${environment.apiUrl}/ad/${id}`,
             {
                 reportProgress: true,
                 responseType: 'json',
