@@ -1,4 +1,5 @@
 import {Schema, model, ObjectId} from 'mongoose';
+import { UserType } from './user';
 
 interface Photo {
   id: string;
@@ -6,6 +7,7 @@ interface Photo {
 }
 
 interface AdType {
+  user: UserType | null;
   title: string;
   description: string;
   photos: Photo[]|undefined;
@@ -16,6 +18,7 @@ interface AdType {
 }
 
 const adSchema = new Schema<AdType>({
+    user: {type: Object},
     title: {type: String},
     description: {type: String},
     photos: [{

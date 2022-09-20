@@ -55,8 +55,8 @@ app.put('/v1/user/:id', jwtValidator, updateUserInfo);
 
 app.get('/v1/ad/list', jwtValidator, getAds);
 app.post('/v1/ad', jwtValidator, createAd);
-app.get('/v1/ad', jwtValidator, getAd);
-app.delete('/v1/ad', jwtValidator, deleteAd);
+app.get('/v1/ad/:id', jwtValidator, getAd);
+app.delete('/v1/ad/:id', jwtValidator, deleteAd);
 
 app.get('/v1/getImage', jwtValidator, getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);

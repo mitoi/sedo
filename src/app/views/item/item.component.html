@@ -6,7 +6,7 @@
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
     </div>
   
-    <div>
+    <div *ngIf="model">
         <mat-card class="mat-elevation-z0">
           <mat-card-header>
             <div mat-card-avatar class="bg-contain">

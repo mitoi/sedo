@@ -4,7 +4,7 @@ import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
 
 describe('Test Get Ad', () => {
-    test('It should respond that id is missing', async () => {
+    test('It should not find the endpoint', async () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
@@ -12,10 +12,7 @@ describe('Test Get Ad', () => {
         const resp = await request(app)
             .get('/v1/ad')
             .set({'authorization': 'test 123'})
-            .expect(422);
-
-            expect(resp.body.error).toBe(true);
-            expect(resp.body.message).toBe(`Id is missing.`);
+            .expect(404);
     });
 
     test('It should respond that id is missing', async () => {
@@ -28,7 +25,7 @@ describe('Test Get Ad', () => {
         const adId = '621f7dc02d49855dbe650c06';
 
         const resp = await request(app)
-            .get('/v1/ad')
+            .get(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
@@ -49,7 +46,7 @@ describe('Test Get Ad', () => {
         const adId = '12345';
 
         const resp = await request(app)
-            .get('/v1/ad')
+            .get(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
@@ -65,8 +62,9 @@ describe('Test Get Ad', () => {
             id: '123',
         } as any);
 
-        const userData = {
+        const adData = {
             '_id': '631f7dc02d49855dbe650c02',
+            'user': {},
             'title': 'title',
             'description': 'description',
             'photos': [
@@ -86,12 +84,12 @@ describe('Test Get Ad', () => {
             '__v': 0
         };
 
-        jest.spyOn(Ad, 'findById').mockReturnValue(userData as any);
+        jest.spyOn(Ad, 'findById').mockReturnValue(adData as any);
 
         const adId = '621f7dc02d49855dbe650c06';
 
         const resp = await request(app)
-            .get('/v1/ad')
+            .get(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
@@ -99,6 +97,6 @@ describe('Test Get Ad', () => {
             .expect(200);
 
             expect(resp.body.error).toBe(false);
-            expect(resp.body.record).toStrictEqual(userData);
+            expect(resp.body.record).toStrictEqual(adData);
     });
 });

@@ -4,7 +4,7 @@ import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
 
 describe('Test Delete Ad', () => {
-    test('It should respond that id is missing', async () => {
+    test('It should not find the endpoint', async () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
@@ -12,10 +12,7 @@ describe('Test Delete Ad', () => {
         const resp = await request(app)
             .delete('/v1/ad')
             .set({'authorization': 'test 123'})
-            .expect(422);
-
-            expect(resp.body.error).toBe(true);
-            expect(resp.body.message).toBe(`Id is missing.`);
+            .expect(404);
     });
 
     test('It should respond that id is invalid', async () => {
@@ -26,7 +23,7 @@ describe('Test Delete Ad', () => {
         const adId = '12345';
 
         const resp = await request(app)
-            .delete('/v1/ad')
+            .delete(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
@@ -47,7 +44,7 @@ describe('Test Delete Ad', () => {
         const adId = '631f7dc02d49855dbe650c01';
 
         const resp = await request(app)
-            .delete('/v1/ad')
+            .delete(`/v1/ad/{adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
@@ -68,7 +65,7 @@ describe('Test Delete Ad', () => {
         const adId = '621f7dc02d49855dbe650c06';
 
         await request(app)
-            .delete('/v1/ad')
+            .delete(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,

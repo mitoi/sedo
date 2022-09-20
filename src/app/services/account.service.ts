@@ -41,7 +41,7 @@ export class AccountService {
             }));
     }
 
-    logout(navigateToLogin: boolean) {
+    logout(navigateToLogin: boolean, navigateToHome: boolean = false) {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         localStorage.removeItem("expires_at");
@@ -49,6 +49,9 @@ export class AccountService {
         this.userSubject.next(null!);
         if (navigateToLogin) {
             this.router.navigate(['/login']);
+        }
+        if (navigateToHome) {
+            this.router.navigate(['/']);
         }
     }
 

@@ -2,9 +2,10 @@ import {Request, Response} from 'express';
 import _ from 'lodash';
 import {Ad, AdType} from '../../models/ad';
 import {Types} from 'mongoose';
+import { User, UserType } from '../../models/user';
 
 const getAd = async (req: Request, res: Response) => {
-    const {id} = req.query;
+    const {id} = req.params;
 
     if (!id || !_.isString(id)) {
         res.status(422).json({
@@ -24,7 +25,7 @@ const getAd = async (req: Request, res: Response) => {
         return;
     }
 
-    const record: AdType|null = await Ad.findById(id);
+    let record: AdType|null = await Ad.findById(id);
 
     if (!record) {
         res.status(404).json({
@@ -34,6 +35,9 @@ const getAd = async (req: Request, res: Response) => {
 
         return;
     }
+
+    const userInfo: UserType|null = await User.findById(record.userId).select("-password");
+    record.user = userInfo;
 
     res.status(200).json({
         error: false,
