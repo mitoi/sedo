@@ -4,7 +4,7 @@ Platform that connects individuals with professionals. Also you can make donatio
 
 # Project Roadmap
 1. Ability to Login/Register ✅
-2. Ability to add new Post/Donation ❌
+2. Ability to add new Post/Donation ✅
 3. Ability to view Posts ❌
 4. Ability to search for Post ❌
 5. Ability to bid for a job ❌
