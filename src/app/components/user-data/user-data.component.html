@@ -1,20 +1,18 @@
-<mat-form-field appearance="outline" class="mr-6">
-    <mat-label>Nume</mat-label>
-    <input matInput />
-</mat-form-field>
+<form [formGroup]="form" (ngSubmit)="saveUserInfo()">
+    <mat-form-field appearance="outline" class="mr-6">
+        <mat-label>Nume</mat-label>
+        <input matInput name="lastName" formControlName="lastName"/>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="mr-6">
-    <mat-label>Prenume</mat-label>
-    <input matInput />
-</mat-form-field>
+    <mat-form-field appearance="outline" class="mr-6">
+        <mat-label>Prenume</mat-label>
+        <input matInput name="firstName" formControlName="firstName"/>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="mr-6">
-    <mat-label>Telefon</mat-label>
-    <input matInput />
-</mat-form-field>
+    <mat-form-field appearance="outline" class="mr-6">
+        <mat-label>Telefon</mat-label>
+        <input matInput name="phone" formControlName="phone"/>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="mr-6">
-    <mat-label>Email</mat-label>
-    <input matInput />
-</mat-form-field>
-<button mat-stroked-button>Salvare</button>
+    <button mat-stroked-button type="submit">Salvare</button>
+</form>

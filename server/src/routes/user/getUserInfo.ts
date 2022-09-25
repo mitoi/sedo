@@ -24,7 +24,7 @@ const getUserInfo = async (req: Request, res: Response) => {
         return;
     }
 
-    const user: UserType|null = await User.findById(id);
+    const user: UserType|null = await User.findById(id).select("-password");
 
     if (!user) {
         res.status(404).json({
