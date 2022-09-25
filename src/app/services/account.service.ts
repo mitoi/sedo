@@ -77,4 +77,17 @@ export class AccountService {
         const expiresAt = JSON.parse(expiration);
         return moment(expiresAt);
     }
-}
+
+    getUserInfo() {
+        let loggedInUser = this.getLoggedInUser();
+        let userId = loggedInUser.user.id;
+
+        return this.http.get<any>(`${environment.apiUrl}/user/${userId}`);
+    }
+
+    updateUserInfo(data: any) {
+        let loggedInUser = this.getLoggedInUser();
+        let userId = loggedInUser.user.id;
+        return this.http.put<any>(`${environment.apiUrl}/user/${userId}`, data);
+    }
+ }
