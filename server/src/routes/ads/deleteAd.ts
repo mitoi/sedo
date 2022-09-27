@@ -4,7 +4,7 @@ import {Ad, AdType} from '../../models/ad';
 import {Types, Error} from 'mongoose';
 
 const deleteAd = async (req: Request, res: Response) => {
-    const {id} = req.query;
+    const {id} = req.params;
 
     if (!id|| !_.isString(id)) {
         res.status(422).json({

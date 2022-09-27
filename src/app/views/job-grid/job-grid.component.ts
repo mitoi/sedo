@@ -4,6 +4,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { JobPosting } from '../../model/JobPosting';
+import { PostService } from 'src/app/services/post.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpResponse } from '@angular/common/http';
 @Component({
     selector: 'app-job-grid',
     templateUrl: './job-grid.component.html',
@@ -25,118 +28,30 @@ export class JobGridComponent implements OnInit {
             shareReplay()
         );
 
-    postings: JobPosting[] = [
-        {
-            id: '1',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                email: 'ion@ion',
-                firstName: 'Ion',
-                lastName: 'George',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-        {
-            id: '2',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                email: 'ion@ion',
-                firstName: 'Ion',
-                lastName: 'George',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-        {
-            id: '3',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                email: 'ion@ion',
-                firstName: 'Ion',
-                lastName: 'George',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-        {
-            id: '4',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                firstName: 'Ion',
-                email: 'ion@ion',
-                lastName: 'George',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-        {
-            id: '5',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                firstName: 'Ion',
-                email: 'ion@ion',
-                lastName: 'George',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-        {
-            id: '6',
-            title: 'Construirea unui balcon',
-            description:
-                'As dori servicii complete (proiectare, obținere autorizații si avize, design interior al locuinței după executarea balconului, eventual si lucrările de construcție si amenajate) pt construirea unui balcon la parterul unei clădiri din Bucuresti, sectorul 1.',
-            date: new Date('2019-01-16'),
-            location: 'Bucuresti, Romania',
-            category: 'Constructii',
-            user: {
-                id: 'userId',
-                type: 'client',
-                firstName: 'Ion',
-                lastName: 'George',
-                email: 'ion@ion',
-                rating: 5,
-                profilePic: '4343',
-            },
-        },
-    ];
+    postings: JobPosting[] = [];
 
-    constructor(private breakpointObserver: BreakpointObserver) {}
+    constructor(
+        private breakpointObserver: BreakpointObserver, 
+        private postService: PostService, 
+        private _snackBar: MatSnackBar,) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.loadPosts();
+    }
+
+    loadPosts(): void {
+        this.postService.listPosts().subscribe({
+            next: (data: any) => {
+                if (data instanceof HttpResponse && data.status == 200 && data.body) {
+                    this.postings = data.body.records;
+                }
+            },
+            error: (err) => {
+                this._snackBar.open('Eroare la incarcare anunturi', 'Eroare', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                });
+            }
+        })
+    }
 }

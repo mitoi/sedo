@@ -90,4 +90,10 @@ export class AccountService {
         let userId = loggedInUser.user.id;
         return this.http.put<any>(`${environment.apiUrl}/user/${userId}`, data);
     }
+
+    getUserPosts() {
+        let loggedInUser = this.getLoggedInUser();
+        let userId = loggedInUser.user.id;
+        return this.http.get<any>(`${environment.apiUrl}/user/${userId}/posts`);
+    }
  }

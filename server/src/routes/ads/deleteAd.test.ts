@@ -44,7 +44,7 @@ describe('Test Delete Ad', () => {
         const adId = '631f7dc02d49855dbe650c01';
 
         const resp = await request(app)
-            .delete(`/v1/ad/{adId}`)
+            .delete(`/v1/ad/${adId}`)
             .set({'authorization': 'test 123'})
             .query({
                 id: adId,
