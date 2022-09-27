@@ -1,12 +1,14 @@
 import {Request, Response} from 'express';
 import {Ad, AdType} from '../../models/ad';
+import { User, UserType } from '../../models/user';
 
 interface sortType {
     [key: string]: number,
 }
 
-interface categoryType {
+interface filterType {
     category?: string,
+    userId?: string,
 }
 
 const getAds = async (req: Request, res: Response) => {
@@ -16,6 +18,7 @@ const getAds = async (req: Request, res: Response) => {
         limit,
         sortDir,
         orderBy,
+        userId,
     } = req.query;
 
     if (!sortDir) {
@@ -64,6 +67,15 @@ const getAds = async (req: Request, res: Response) => {
         return;
     }
 
+    if (userId && typeof userId !== 'string') {
+        res.status(422).json({
+            error: true,
+            message: 'Invalid user id.',
+        });
+
+        return;
+    }
+
     if (typeof orderBy !== 'string') {
         res.status(422).json({
             error: true,
@@ -97,10 +109,14 @@ const getAds = async (req: Request, res: Response) => {
     const sort:sortType = {};
     sort[orderBy] = listSortDir;
 
-    const filter: categoryType = {};
+    const filter: filterType = {};
 
     if (category) {
         filter.category = category;
+    }
+
+    if (userId) {
+        filter.userId = userId;
     }
 
     const records: AdType[]|null = await Ad
@@ -108,6 +124,12 @@ const getAds = async (req: Request, res: Response) => {
         .sort(sort)
         .skip(listStartPosition)
         .limit(listLimit);
+
+    // we need user firstName and lasName    
+    for (let record of records) {
+        const userInfo: UserType|null = await User.findById(record.userId).select("firstName, lastName");
+        record.user = userInfo;
+    }
 
     res.status(200).json({
         error: false,

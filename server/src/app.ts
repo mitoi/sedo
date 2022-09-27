@@ -16,6 +16,7 @@ import rateLimit from 'express-rate-limit';
 import {getAds} from './routes/ads/getAds';
 import {getUserInfo} from './routes/user/getUserInfo';
 import {updateUserInfo} from './routes/user/updateUserInfo';
+import {getUserPosts} from './routes/user/getUserInfo';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -52,10 +53,11 @@ app.delete('/v1/logout', logout);
 
 app.get('/v1/user/:id', jwtValidator, getUserInfo);
 app.put('/v1/user/:id', jwtValidator, updateUserInfo);
+app.get('/v1/user/:id/posts', jwtValidator, getUserPosts);
 
-app.get('/v1/ad/list', jwtValidator, getAds);
+app.get('/v1/ad/list', getAds);
 app.post('/v1/ad', jwtValidator, createAd);
-app.get('/v1/ad/:id', jwtValidator, getAd);
+app.get('/v1/ad/:id', getAd);
 app.delete('/v1/ad/:id', jwtValidator, deleteAd);
 
 app.get('/v1/getImage', jwtValidator, getImage);

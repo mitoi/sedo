@@ -22,7 +22,7 @@ export class PostService {
             }
         );
 
-        return this.http.request(req);;
+        return this.http.request(req);
     }
 
     getPost(id: string): Observable<HttpEvent<any>>{
@@ -35,6 +35,28 @@ export class PostService {
             }
         );
 
-        return this.http.request(req);;
+        return this.http.request(req);
+    }
+
+    deletePost(id: string): Observable<HttpEvent<any>>{
+        const req = new HttpRequest(
+            'DELETE',
+            `${environment.apiUrl}/ad/${id}`,
+            {
+                reportProgress: true,
+                responseType: 'json',
+            }
+        );
+
+        return this.http.request(req);
+    }
+
+    listPosts(){
+        const req = new HttpRequest(
+            'GET',
+            `${environment.apiUrl}/ad/list`,
+        );
+
+        return this.http.request(req);
     }
 }

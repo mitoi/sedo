@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import {User, UserType} from '../../models/user';
 import _ from 'lodash';
 import {Types} from 'mongoose';
+import { getAds } from '../ads/getAds';
 
 const getUserInfo = async (req: Request, res: Response) => {
     const {id} = req.params;
@@ -41,6 +42,14 @@ const getUserInfo = async (req: Request, res: Response) => {
     });
 };
 
+const getUserPosts = async (req: Request, res: Response) => {
+    const {id} = req.params;
+    req.query.userId = id;
+
+    return getAds(req, res);
+}
+
 export {
     getUserInfo,
+    getUserPosts,
 };

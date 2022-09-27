@@ -10,4 +10,5 @@ export interface JobPosting {
     user: User,
     category: string,
     pictures?: Pictures,
+    userId: string,
 }

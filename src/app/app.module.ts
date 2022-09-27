@@ -56,6 +56,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +83,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     UserInfoComponent,
     UserDataComponent,
     UserPostsComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

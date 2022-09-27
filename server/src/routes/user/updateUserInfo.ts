@@ -67,6 +67,7 @@ const allowedFieldsForUpdate = [
     'type',
 ];
 
+
 export {
     updateUserInfo,
 };

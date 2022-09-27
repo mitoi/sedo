@@ -9,7 +9,9 @@ import {Router} from "@angular/router";
 })
 export class JobGridItemComponent implements OnInit {
 
-  constructor(private _router: Router) { }
+  constructor(
+    private _router: Router
+  ) { }
 
   @Input()
   model!: JobPosting;
