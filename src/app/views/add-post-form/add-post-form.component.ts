@@ -8,7 +8,7 @@ import { PostService } from 'src/app/services/post.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from 'src/app/services/account.service';
 import { ADType } from 'src/app/enums/type';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-add-post-form',
@@ -24,8 +24,10 @@ export class AddPostFormComponent implements OnInit {
 
     public categories = Object.values(Category);
     public CategoryMapping = CategoryMapping;
-
+    postCategory: string | undefined;
+    
     constructor(
+        private route: ActivatedRoute,
         private http: HttpClient,
         private fb: FormBuilder,
         private uploadService: FileUploadService,
@@ -36,6 +38,8 @@ export class AddPostFormComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.postCategory = this.route.snapshot.queryParams['category'];
+
         this.form = this.fb.group({
             title: ['', [Validators.required]],
             description: ['', [Validators.required]],
@@ -45,6 +49,10 @@ export class AddPostFormComponent implements OnInit {
             file: [''],
             fileSource: [null],
         });
+
+        if (this.postCategory === 'donation') {
+            this.form.controls['price'].setValue('DONATIE');
+        }
     }
 
     get f() {
@@ -63,7 +71,7 @@ export class AddPostFormComponent implements OnInit {
 
     // on form submit function
     onSubmit() {
-        const user = this.accountService.getLoggedInUser();
+        const user = this.accountService.userValue;
         if (!user) {
             this._snackBar.open('Eroare neasteptata', 'Eroare', {
                 horizontalPosition: 'center',

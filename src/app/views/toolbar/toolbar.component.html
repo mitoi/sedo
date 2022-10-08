@@ -1,16 +1,20 @@
 <mat-toolbar class="bg-white flex flex-row mat-elevation-z5 mb-4">
   <div class="basis-2/5 flex flex-row">
-    <mat-icon class="mr-2" aria-hidden="false" aria-label="Example home icon" routerLink="/">emoji_people</mat-icon>
-    <span>SEDO</span>
+    <mat-icon class="mr-2 sedo_logo" aria-hidden="false" aria-label="Example home icon" routerLink="/">emoji_people</mat-icon>
+    <span class="sedo_logo" routerLink="/">SEDO</span>
   </div>
   <div class="basis-3/5 flex flex-row items-center grow justify-end">
   
     <div *ngIf="!loggedIn" class="mr-2 flex gap-1.5">
       <button routerLink="/login" mat-stroked-button>Autentificare</button>
     </div>
-    <div *ngIf="loggedIn" class="mr-2 flex gap-1.5">
+    <div *ngIf="loggedIn && userType=='furnizor'" class="mr-2 flex gap-1.5">
       <button (click)="addPost()" mat-stroked-button>Adaugare Anunt</button>
+    </div>
+    <div *ngIf="loggedIn && userType=='ong'" class="mr-2 flex gap-1.5">
       <button (click)="addDonation()" mat-stroked-button>Adaugare Donatie</button>
+    </div>
+    <div *ngIf="loggedIn" class="mr-2 flex gap-1.5">
       <button (click)="goToSettings()" mat-stroked-button>Setari</button>
 
       <button (click)="logout()" mat-stroked-button>Logout</button>

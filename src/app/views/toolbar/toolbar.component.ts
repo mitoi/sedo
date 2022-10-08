@@ -10,6 +10,7 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class ToolbarComponent implements OnInit {
   loggedIn: any;
+  userType: any;
 
   constructor(
     private accountService: AccountService,
@@ -17,17 +18,24 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loggedIn = this.accountService.getLoggedInUser();
+    this.loggedIn = this.accountService.userValue;
+    if (this.loggedIn && this.loggedIn.user) {
+        this.userType = this.loggedIn.user.type;
+    }
   }
 
   logout():void {
-    this.accountService.logout(true);
+    this.accountService._logoutForReal(true, false);
   }
 
   addPost(): void {
     this.router.navigate(['add_post']);
   }
-  addDonation(): void {}
+  
+  addDonation(): void {
+    this.router.navigate(['add_post'], {queryParams: {category: 'donation'}});
+  }
+
   goToSettings(): void {
     this.router.navigate(['settings']);
   }

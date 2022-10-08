@@ -59,6 +59,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { UserBidsComponent } from './components/user-bids/user-bids.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     UserDataComponent,
     UserPostsComponent,
     ConfirmDialogComponent,
+    UserBidsComponent,
   ],
   imports: [
     BrowserModule,

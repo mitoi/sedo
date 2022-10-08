@@ -15,7 +15,7 @@
     <!--Price-->
     <mat-form-field appearance="outline">
         <mat-label>Pret</mat-label>
-        <input matInput formControlName="price" />
+        <input matInput formControlName="price" [readonly]="postCategory == 'donation'" />
     </mat-form-field>
     <!--Location-->
     <mat-form-field appearance="outline">
