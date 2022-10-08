@@ -17,11 +17,11 @@ const register = async (req: Request, res: Response) => {
             password,
         } = req.body;
 
-        if (!(firstName && lastName && phone
+        if (!(lastName && phone
             && email && type && password)) {
             return res.status(400).json({
                 error: true,
-                message: 'Missing fields. Required fields: firstName, lastName, phone, email, type, passsword.',
+                message: 'Missing fields. Required fields: lastName, phone, email, type, passsword.',
             });
         }
 

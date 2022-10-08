@@ -20,7 +20,7 @@ export class JobGridItemComponent implements OnInit {
   }
 
   async onClickItem() {
-    const id: string = this.model.id;
+    const id: string = this.model._id;
 
     await this._router.navigate(['item', id], {
       queryParams: {

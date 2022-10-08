@@ -12,7 +12,7 @@
        <app-user-data></app-user-data>
     </mat-expansion-panel>
     
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="userType == 'furnizor' || userType == 'ong'">
         <mat-expansion-panel-header>
             <mat-panel-title> Anunturile tale </mat-panel-title>
             <mat-panel-description>
@@ -22,6 +22,19 @@
         </mat-expansion-panel-header>
 
         <app-user-posts></app-user-posts>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="userType == 'client'">
+        <mat-expansion-panel-header>
+            <mat-panel-title> Anunturi la care ai aplicat </mat-panel-title>
+            <mat-panel-description>
+                Vezi o lista cu aplicarile tale
+                <mat-icon>date_range</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <app-user-bids></app-user-bids>
         <mat-datepicker #picker></mat-datepicker>
     </mat-expansion-panel>
 </mat-accordion>

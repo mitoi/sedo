@@ -9,13 +9,20 @@ import { AccountService } from 'src/app/services/account.service';
     templateUrl: './user-info.component.html',
     styleUrls: ['./user-info.component.css'],
 })
+
 export class UserInfoComponent implements OnInit {
     @ViewChild(MatAccordion)
     accordion!: MatAccordion;
+    loggedIn: any;
+    userType: any;
 
-    constructor() {}
+    constructor(private accountService: AccountService) {}
 
     ngOnInit(): void {
+    this.loggedIn = this.accountService.userValue;
+    if (this.loggedIn && this.loggedIn.user) {
+        this.userType = this.loggedIn.user.type;
+    }
     }
 
 }

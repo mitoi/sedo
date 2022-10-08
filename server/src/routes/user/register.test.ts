@@ -15,7 +15,7 @@ describe('Test User Register', () => {
 
         expect(res.body.error).toBe(true);
         expect(res.body.message).toBe(
-            'Missing fields. Required fields: firstName, lastName, phone, email, type, passsword.',
+            'Missing fields. Required fields: lastName, phone, email, type, passsword.',
         );
     });
 

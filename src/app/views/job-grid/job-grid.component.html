@@ -1,8 +1,5 @@
-<mat-grid-list  [cols]="cols$ | async" gutterSize="10px" rowHeight="250px">
-    <mat-grid-tile
-    *ngFor="let posting of postings"
-    [colspan]="1"
-    [rowspan]="1">
-  <app-job-grid-item [model]="posting"></app-job-grid-item>
-</mat-grid-tile>
+<mat-grid-list [cols]="cols$ | async" gutterSize="10px" rowHeight="250px">
+    <mat-grid-tile *ngFor="let posting of postings" [colspan]="1" [rowspan]="1">
+        <app-job-grid-item [model]="posting"></app-job-grid-item>
+    </mat-grid-tile>
 </mat-grid-list>
