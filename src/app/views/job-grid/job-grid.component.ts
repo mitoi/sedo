@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
@@ -29,6 +29,7 @@ export class JobGridComponent implements OnInit {
         );
 
     postings: JobPosting[] = [];
+    private _activeCategory: string = '';
 
     constructor(
         private breakpointObserver: BreakpointObserver, 
@@ -36,11 +37,22 @@ export class JobGridComponent implements OnInit {
         private _snackBar: MatSnackBar,) {}
 
     ngOnInit(): void {
-        this.loadPosts();
+        this.loadPosts(this.activeCategory);
     }
+    
+    @Input() set activeCategory(value: string) {
+    
+        this._activeCategory = value;
+        this.loadPosts(this._activeCategory);
+     
+     }
 
-    loadPosts(): void {
-        this.postService.listPosts().subscribe({
+    loadPosts(category:any): void {
+        if (!category && this.activeCategory) {
+            category = this.activeCategory;
+        }
+
+        this.postService.listPosts(category).subscribe({
             next: (data: any) => {
                 if (data instanceof HttpResponse && data.status == 200 && data.body) {
                     this.postings = data.body.records;
@@ -52,6 +64,6 @@ export class JobGridComponent implements OnInit {
                     verticalPosition: 'top',
                 });
             }
-        })
+        });
     }
 }

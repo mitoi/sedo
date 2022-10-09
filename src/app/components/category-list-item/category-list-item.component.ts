@@ -1,21 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Category} from "../../model/Category";
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Category } from '../../model/Category';
 
 @Component({
-  selector: 'app-category-list-item',
-  templateUrl: './category-list-item.component.html',
-  styleUrls: ['./category-list-item.component.css']
+    selector: 'app-category-list-item',
+    templateUrl: './category-list-item.component.html',
+    styleUrls: ['./category-list-item.component.css'],
 })
 export class CategoryListItemComponent implements OnInit {
+    @Output() categoryChanged = new EventEmitter<string>();
 
-  constructor() { }
+    constructor() {}
 
-  @Input()
-  item!: Category;
+    @Input()
+    item!: Category;
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 
-  onClickCategory() {
-  }
+    onClickCategory() {        
+        this.categoryChanged.emit(this.item.type);
+    }
 }
