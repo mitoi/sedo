@@ -1,5 +1,5 @@
 
-<app-search-bar></app-search-bar>
+<app-search-bar (querySearch)="querySearch($event)"></app-search-bar>
 <mat-card-title class="text-center p-4">Categorii principale</mat-card-title>
 <div class="text-center p-4"><app-category-list (categoryChanged)="categoryChangedEvent($event)"></app-category-list></div>
 

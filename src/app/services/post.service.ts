@@ -63,4 +63,17 @@ export class PostService {
 
         return this.http.request(req);
     }
+
+    searchPosts(query: any){
+        let url = `${environment.apiUrl}/ad/list`;
+        if (query) {
+            url += `?title=${query}`;
+        }
+        const req = new HttpRequest(
+            'GET',
+            url,
+        );
+
+        return this.http.request(req);
+    }
 }

@@ -28,12 +28,16 @@ export class ItemComponent implements OnInit {
     galleryOptions: NgxGalleryOptions[] = [];
     galleryImages: NgxGalleryImage[] = [];
 
+    activeUser:any;
+
     constructor(
         private route: ActivatedRoute,
         private breakpointObserver: BreakpointObserver,
         private postService: PostService,
         private _snackBar: MatSnackBar,
+        private _accountService: AccountService,
     ) {
+        this.activeUser = this._accountService.userValue;
         this.id = this.route.snapshot.params['id'];
         this.category = this.route.snapshot.queryParams['category'];
 

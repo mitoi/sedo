@@ -1,3 +1,3 @@
 <app-toolbar></app-toolbar>
-<app-home-search-category (categoryChanged)="categoryChangedEvent($event)"></app-home-search-category>
-<app-job-grid activeCategory="{{activeCategory}}"></app-job-grid>
+<app-home-search-category (categoryChanged)="categoryChangedEvent($event)" (queryChanged)="searchByQuery($event)"></app-home-search-category>
+<app-job-grid activeCategory="{{activeCategory}}" searchQuery="{{activeSearchQuery}}"></app-job-grid>

@@ -30,6 +30,7 @@ export class JobGridComponent implements OnInit {
 
     postings: JobPosting[] = [];
     private _activeCategory: string = '';
+    private _searchQuery: string = '';
 
     constructor(
         private breakpointObserver: BreakpointObserver, 
@@ -37,21 +38,40 @@ export class JobGridComponent implements OnInit {
         private _snackBar: MatSnackBar,) {}
 
     ngOnInit(): void {
-        this.loadPosts(this.activeCategory);
+        this.loadPosts(this._activeCategory);
     }
     
     @Input() set activeCategory(value: string) {
-    
         this._activeCategory = value;
         this.loadPosts(this._activeCategory);
      
-     }
+    }
+
+    @Input() set searchQuery(value: string) {
+        this._searchQuery = value;
+        this.searchPosts(this._searchQuery);
+    }
+
+    searchPosts(query:any): void {
+        if (!query) {
+            return;
+        }
+        this.postService.searchPosts(query).subscribe({
+            next: (data: any) => {
+                if (data instanceof HttpResponse && data.status == 200 && data.body) {
+                    this.postings = data.body.records;
+                }
+            },
+            error: (err) => {
+                this._snackBar.open('Eroare la incarcare anunturi', 'Eroare', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                });
+            }
+        });
+    }
 
     loadPosts(category:any): void {
-        if (!category && this.activeCategory) {
-            category = this.activeCategory;
-        }
-
         this.postService.listPosts(category).subscribe({
             next: (data: any) => {
                 if (data instanceof HttpResponse && data.status == 200 && data.body) {

@@ -8,11 +8,14 @@ interface sortType {
 
 interface filterType {
     category?: string,
+    title?: any,
+    description?: any,
     userId?: string,
 }
 
 const getAds = async (req: Request, res: Response) => {
     let {
+        title,
         category,
         startPosition,
         limit,
@@ -67,6 +70,15 @@ const getAds = async (req: Request, res: Response) => {
         return;
     }
 
+    if (title && typeof title !== 'string') {
+        res.status(422).json({
+            error: true,
+            message: 'Invalid title.',
+        });
+
+        return;
+    }
+
     if (userId && typeof userId !== 'string') {
         res.status(422).json({
             error: true,
@@ -113,6 +125,10 @@ const getAds = async (req: Request, res: Response) => {
 
     if (category) {
         filter.category = category;
+    }
+
+    if (title) {
+        filter.title = {$regex: `.*${title}.*`};
     }
 
     if (userId) {
