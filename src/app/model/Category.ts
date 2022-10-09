@@ -1,6 +1,8 @@
 export interface Category {
-  title: string,
+  label: string,
   imagePath?: string,
   icon?: string,
   router?: string,
+  type?: string,
+  class?:string,
 }

@@ -51,10 +51,14 @@ export class PostService {
         return this.http.request(req);
     }
 
-    listPosts(){
+    listPosts(category: any){
+        let url = `${environment.apiUrl}/ad/list`;
+        if (category) {
+            url += `?category=${category}`;
+        }
         const req = new HttpRequest(
             'GET',
-            `${environment.apiUrl}/ad/list`,
+            url,
         );
 
         return this.http.request(req);

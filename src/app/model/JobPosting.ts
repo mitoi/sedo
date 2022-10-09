@@ -11,4 +11,5 @@ export interface JobPosting {
     category: string,
     pictures?: Pictures,
     userId: string,
+    price?: string,
 }

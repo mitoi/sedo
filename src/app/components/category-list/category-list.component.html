@@ -2,13 +2,12 @@
   [cols]="cols$ | async"
   gutterSize="5px"
   rowHeight="80px"
-  class="ml-20 mr-20"
 >
   <mat-grid-tile
     *ngFor="let item of items"
     [colspan]="1"
     [rowspan]="1"
   >
-    <app-category-list-item [item]="item"></app-category-list-item>
+    <app-category-list-item [item]="item" (categoryChanged)="changeCategories($event)"></app-category-list-item>
   </mat-grid-tile>
 </mat-grid-list>

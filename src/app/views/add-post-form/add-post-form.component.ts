@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
-import { Category, CategoryMapping } from 'src/app/enums/category';
+import { Category, CategoryMapping, getType } from 'src/app/enums/category';
 import { PostService } from 'src/app/services/post.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountService } from 'src/app/services/account.service';
@@ -28,7 +28,6 @@ export class AddPostFormComponent implements OnInit {
     
     constructor(
         private route: ActivatedRoute,
-        private http: HttpClient,
         private fb: FormBuilder,
         private uploadService: FileUploadService,
         private postService: PostService,
@@ -78,10 +77,11 @@ export class AddPostFormComponent implements OnInit {
                 verticalPosition: 'top',
             });
         }
+
         const postData = {
             title: this.form.get('title')?.value,
             description: this.form.get('description')?.value,
-            category: this.form.get('category')?.value,
+            category: getType(this.form.get('category')?.value),
             price: this.form.get('price')?.value,
             photos: <any>[],
             userId: user.user.id,
