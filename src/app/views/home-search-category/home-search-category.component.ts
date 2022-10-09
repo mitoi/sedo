@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HomeSearchCategoryComponent implements OnInit {
     @Output() categoryChanged = new EventEmitter<string>();
+    @Output() queryChanged = new EventEmitter<string>();
 
     constructor() {}
 
@@ -14,5 +15,8 @@ export class HomeSearchCategoryComponent implements OnInit {
 
     categoryChangedEvent(event: any): void {
         this.categoryChanged.emit(event);
+    }
+    querySearch(event: any): void {
+        this.queryChanged.emit(event);
     }
 }

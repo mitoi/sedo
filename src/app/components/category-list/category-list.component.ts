@@ -33,6 +33,11 @@ export class CategoryListComponent implements OnInit {
 
     ngOnInit(): void {
         this.items = CategoryArray;
+        this.items.map((category: { type: string; class: string | null }) => {
+            category.class = '';
+
+            return category;
+        });
     }
 
     changeCategories(event: any): void {
