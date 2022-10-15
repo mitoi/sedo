@@ -9,11 +9,17 @@ import { Router } from '@angular/router';
 })
 export class JobGridItemComponent implements OnInit {
     constructor(private _router: Router) {}
+    
+    primaryPhotoId: string = null;
 
     @Input()
     model!: JobPosting;
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        if (this.model.photos instanceof Array && this.model.photos.length > 0) {
+            this.primaryPhotoId = this.model.photos[0];
+        }
+    }
 
     async onClickItem() {
         const id: string = this.model._id;

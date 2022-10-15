@@ -12,4 +12,5 @@ export interface JobPosting {
     pictures?: Pictures,
     userId: string,
     price?: string,
+    photos?: Array<string>,
 }

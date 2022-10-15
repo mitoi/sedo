@@ -8,9 +8,11 @@ describe('Test get image', () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
+        
+        const id = '123';
 
         const res = await request(app)
-            .get('/v1/getImage')
+            .get(`/v1/getImage/${id}`)
             .set({authorization: 'test 123'})
             .expect(422);
 

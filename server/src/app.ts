@@ -32,7 +32,9 @@ const apiLimiter = rateLimit({
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+}));
 app.use(helmet.noSniff()); // prevents MIME type sniffing.
 app.use(helmet.ieNoOpen()); // specific to the vulnerabilities in IE 8 and forces potentially unsafe downloads to be saved and prevents the execution of HTML in your site’s context.
 app.use(helmet.referrerPolicy({ // controls the information inside the Referer header.
@@ -60,7 +62,7 @@ app.post('/v1/ad', jwtValidator, createAd);
 app.get('/v1/ad/:id', getAd);
 app.delete('/v1/ad/:id', jwtValidator, deleteAd);
 
-app.get('/v1/getImage', jwtValidator, getImage);
+app.get('/v1/getImage/:id', getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);
 
 export default app;

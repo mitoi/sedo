@@ -2,7 +2,8 @@
     <mat-card-title-group>
         <mat-card-title>{{model.title}}</mat-card-title>
         <mat-card-subtitle>{{model.user.firstName}} {{model.user.lastName}} - {{model.date | date}}</mat-card-subtitle>
-        <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+        <img mat-card-sm-image *ngIf="primaryPhotoId" src="http://localhost:3000/v1/getImage/{{primaryPhotoId}}" >
+        <img mat-card-sm-image *ngIf="!primaryPhotoId" src="../../assets/No_Image_Available.jpeg" >
     </mat-card-title-group>
     <mat-card-content title="{{model.description}}">
         {{model.description | slice:0:100}}...
