@@ -3,7 +3,7 @@ import {Image, ImageType} from '../../models/image';
 import _ from 'lodash';
 
 const getImage = async (req: Request, res: Response) => {
-    const {id} = req.query;
+    const {id} = req.params;
 
     if (!id || !_.isString(id)) {
         res.status(422).json({
@@ -28,12 +28,7 @@ const getImage = async (req: Request, res: Response) => {
     const {data, contentType} = record.image;
 
     if (data && contentType) {
-        res.type(contentType).json(
-            {
-                error: false,
-                data: `data:${contentType};base64,${Buffer.from(data).toString('base64')}`,
-            },
-        );
+        res.type(contentType).send(data);
     }
 };
 
