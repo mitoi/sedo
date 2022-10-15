@@ -8,7 +8,12 @@ describe('Test Get User Info', () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
-        jest.spyOn(User, 'findById').mockReturnValue(null as any);
+
+        jest.spyOn(User, 'findById').mockReturnValue({
+            select(){
+                return null;
+            }
+        } as any);
 
         const id = '321312';
 
@@ -25,7 +30,12 @@ describe('Test Get User Info', () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
-        jest.spyOn(User, 'findById').mockReturnValue(null as any);
+
+        jest.spyOn(User, 'findById').mockReturnValue({
+            select(){
+                return null;
+            }
+        } as any);
 
         const id = '621f7dc02d49855dbe650c06';
 
@@ -57,8 +67,11 @@ describe('Test Get User Info', () => {
 
         const id = '621f7dc02d49855dbe650c06';
 
-        jest.spyOn(User, 'findById').mockReturnValue(user as any);
-
+        jest.spyOn(User, 'findById').mockReturnValue({
+            select(){
+                return user;
+            }
+        } as any);
         const resp = await request(app)
             .get(`/v1/user/${id}`)
             .set({authorization: 'test 123'});

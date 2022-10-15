@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from './../../app';
 import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
+import { User } from '../../models/user';
 
 describe('Test Get Ad', () => {
     test('It should not find the endpoint', async () => {
@@ -85,7 +86,11 @@ describe('Test Get Ad', () => {
         };
 
         jest.spyOn(Ad, 'findById').mockReturnValue(adData as any);
-
+        jest.spyOn(User, 'findById').mockReturnValue({
+            select(){
+                return {firstName: "firstName", lastName: "lastName"};
+            }
+        } as any);
         const adId = '621f7dc02d49855dbe650c06';
 
         const resp = await request(app)

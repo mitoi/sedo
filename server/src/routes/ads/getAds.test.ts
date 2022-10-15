@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from './../../app';
 import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
+import { User } from '../../models/user';
 
 describe('Test Get Ads', () => {
     test('It should respond that max limit exceeded', async () => {
@@ -22,6 +23,7 @@ describe('Test Get Ads', () => {
     });
 
     test('It should respond invalid limit', async () => {
+        expect.assertions(2);
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
@@ -93,6 +95,12 @@ describe('Test Get Ads', () => {
                     },
                 };
             },
+        } as any);
+
+        jest.spyOn(User, 'findById').mockReturnValue({
+            select(){
+                return {firstName: "firstName", lastName: "lastName"};
+            }
         } as any);
 
         const resp = await request(app)
