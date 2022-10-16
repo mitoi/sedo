@@ -13,6 +13,9 @@ import { PostService } from 'src/app/services/post.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpResponse } from '@angular/common/http';
 import { AccountService } from 'src/app/services/account.service';
+import { BidDialogComponent } from 'src/app/components/bid-dialog/bid-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { BidService } from 'src/app/services/bid.service';
 
 @Component({
     selector: 'app-item',
@@ -36,8 +39,11 @@ export class ItemComponent implements OnInit {
         private postService: PostService,
         private _snackBar: MatSnackBar,
         private _accountService: AccountService,
+        private _bidService: BidService,
+        public dialog: MatDialog
     ) {
-        this.activeUser = this._accountService.userValue;
+        this.activeUser = this._accountService.userValue.user;
+        
         this.id = this.route.snapshot.params['id'];
         this.category = this.route.snapshot.queryParams['category'];
 
@@ -123,6 +129,39 @@ export class ItemComponent implements OnInit {
                     verticalPosition: 'top',
                 });
             },
+        });
+    }
+
+    bid(): void {
+        const dialogRef = this.dialog.open(BidDialogComponent, {
+            maxWidth: '400px',
+            data: {model: this.model, activeUser: this.activeUser},
+        });
+
+        dialogRef.afterClosed().subscribe((dialogResult) => {
+            if (dialogResult) {
+                let model = dialogResult.model;
+                let activeUser = dialogResult.activeUser;
+
+                this._bidService.createBid({
+                    adId: model._id,
+                    bidderUserId: activeUser.id,
+                    description: dialogResult.message,
+                }).subscribe({
+                    next: (data) => {
+                        this._snackBar.open('Ai aplicat cu succes', 'Succes', {
+                            horizontalPosition: 'center',
+                            verticalPosition: 'top',
+                        });
+                    },
+                    error: (err) => {
+                        this._snackBar.open('Eroare', 'Eroare', {
+                            horizontalPosition: 'center',
+                            verticalPosition: 'top',
+                        });
+                    }
+                });
+            }
         });
     }
 }

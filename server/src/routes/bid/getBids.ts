@@ -18,16 +18,16 @@ interface ResponseBid extends BidType {
 }
 
 const getBidsByAd = async (req: Request, res: Response) => {
-    const {adId} = req.params;
+    const {id} = req.params;
     const type: string = 'bidderUser';
 
     let records = [];
     const filter: FilterUserType = {
-        adId,
+        id,
     };
 
     try {
-        records = await getBidsBy(adId, 'adId', type, filter);
+        records = await getBidsBy(id, 'adId', type, filter);
     } catch (e) {
         if (e instanceof InvalidRequest) {
             res.status(e.code)

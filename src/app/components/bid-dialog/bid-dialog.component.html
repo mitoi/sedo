@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>
+    Vreau sa aplic la acest anunt
+</h1>
+
+<div mat-dialog-content class="w-full">
+    <mat-form-field appearance="fill" class="w-full">
+        <textarea class="w-full" matInput placeholder="Spune de ce esti potrivit pentru acest job" [(ngModel)]="bidMessage"></textarea>
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onDismiss()">Renunt</button>
+    <button mat-raised-button color="primary" (click)="onConfirm()">Aplica</button>
+</div>

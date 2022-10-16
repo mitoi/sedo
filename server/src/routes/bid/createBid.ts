@@ -3,12 +3,16 @@ import {Types} from 'mongoose';
 import {Bid} from '../../models/bid';
 
 const createBid = async (req: Request, res: Response) => {
-    const {adId} = req.params;
+    const {
+        adId,
+        description,
+        bidderUserId
+    } = req.body;
 
     if (!adId) {
-        res.status(404).json({
+        res.status(409).json({
             error: true,
-            message: 'Ad ID is missing from URL.',
+            message: 'Ad ID is missing.',
         });
 
         return;
@@ -22,11 +26,6 @@ const createBid = async (req: Request, res: Response) => {
 
         return;
     }
-
-    const {
-        description,
-        bidderUserId,
-    } = req.body;
 
     if (!bidderUserId || !Types.ObjectId.isValid(bidderUserId)) {
         const bidderUserIdFieldName = Object.keys({bidderUserId})[0];

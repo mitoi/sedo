@@ -60,6 +60,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { UserBidsComponent } from './components/user-bids/user-bids.component';
+import { BidDialogComponent } from './components/bid-dialog/bid-dialog.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { UserBidsComponent } from './components/user-bids/user-bids.component';
     UserPostsComponent,
     ConfirmDialogComponent,
     UserBidsComponent,
+    BidDialogComponent,
   ],
   imports: [
     BrowserModule,
