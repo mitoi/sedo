@@ -1,0 +1,36 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: 6.0
+
+      - name: Check out
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3 #this will install Node and npm on Ubuntu
+        with:
+          node-version: '18.x'
+      - run: npm install
+      - run: npm install -g @angular/cli > /dev/null
+      - run: ng build --prod --output-path=dist --base-href="https://sedo.github.io/sedo/"
+      - run: npm install --silent -g typescript ts-node
+      - run: npm install
+        working-directory: ./server
+      - run: npm run sedo
+        working-directory: ./server
+
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+        with:
+          dir: dist
+          branch: gh-pages
+          token: ${{ secrets.ACCESS_TOKEN }}
