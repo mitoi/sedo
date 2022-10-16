@@ -61,6 +61,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { UserBidsComponent } from './components/user-bids/user-bids.component';
 import { BidDialogComponent } from './components/bid-dialog/bid-dialog.component';
+import { PostBidsComponent } from './components/post-bids/post-bids.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { BidDialogComponent } from './components/bid-dialog/bid-dialog.component
     ConfirmDialogComponent,
     UserBidsComponent,
     BidDialogComponent,
+    PostBidsComponent,
   ],
   imports: [
     BrowserModule,

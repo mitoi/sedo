@@ -19,11 +19,11 @@ interface ResponseBid extends BidType {
 
 const getBidsByAd = async (req: Request, res: Response) => {
     const {id} = req.params;
-    const type: string = 'bidderUser';
+    const type: string = 'adId';
 
     let records = [];
     const filter: FilterUserType = {
-        id,
+        adId: id,
     };
 
     try {
