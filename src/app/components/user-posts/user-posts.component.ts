@@ -1,3 +1,4 @@
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,6 +10,13 @@ import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/co
     selector: 'app-user-posts',
     templateUrl: './user-posts.component.html',
     styleUrls: ['./user-posts.component.css'],
+    animations: [
+        trigger('detailExpand', [
+          state('collapsed', style({height: '0px', minHeight: '0'})),
+          state('expanded', style({height: '*'})),
+          transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+      ],
 })
 export class UserPostsComponent implements OnInit {
     constructor(
@@ -25,6 +33,8 @@ export class UserPostsComponent implements OnInit {
         'price',
         'actions',
     ];
+    columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+    expandedElement: any;
     dataSource: any = [];
 
     ngOnInit(): void {

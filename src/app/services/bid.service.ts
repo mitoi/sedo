@@ -29,4 +29,9 @@ export class BidService {
         let url = `${environment.apiUrl}/user/${userId}/bids`;
         return this.http.get<any>(url);
     }
+
+    getPostBids(postId: string) {
+        let url = `${environment.apiUrl}/ad/${postId}/bids`;
+        return this.http.get<any>(url);
+    }
 }
