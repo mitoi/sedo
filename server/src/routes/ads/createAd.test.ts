@@ -47,5 +47,5 @@ describe('Test Create Ad', () => {
         expect(resp.body.error).toBe(false);
         expect(resp.body.id).toBe('addId');
         expect(resp.status).toBe(201);
-    })
+    });
 });

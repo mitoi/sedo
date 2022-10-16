@@ -2,7 +2,7 @@ import {Request, Response} from 'express';
 import {User, UserType} from '../../models/user';
 import _ from 'lodash';
 import {Types} from 'mongoose';
-import { getAds } from '../ads/getAds';
+import {getAds} from '../ads/getAds';
 
 const getUserInfo = async (req: Request, res: Response) => {
     const {id} = req.params;
@@ -25,7 +25,7 @@ const getUserInfo = async (req: Request, res: Response) => {
         return;
     }
 
-    const user: UserType|null = await User.findById(id).select("-password");
+    const user: UserType|null = await User.findById(id).select('-password');
 
     if (!user) {
         res.status(404).json({
@@ -47,7 +47,7 @@ const getUserPosts = async (req: Request, res: Response) => {
     req.query.userId = id;
 
     return getAds(req, res);
-}
+};
 
 export {
     getUserInfo,
