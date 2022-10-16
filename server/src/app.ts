@@ -18,8 +18,7 @@ import {getUserInfo} from './routes/user/getUserInfo';
 import {updateUserInfo} from './routes/user/updateUserInfo';
 import {getUserPosts} from './routes/user/getUserInfo';
 import {createBid} from './routes/bid/createBid';
-import {getBidsByUserBidder, getBidsByUserAd} from './routes/bid/getBids';
-import {getBid} from './routes/bid/getBid';
+import {getBidsByAd, getUserBids} from './routes/bid/getBids';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -59,6 +58,7 @@ app.delete('/v1/logout', logout);
 app.get('/v1/user/:id', jwtValidator, getUserInfo);
 app.put('/v1/user/:id', jwtValidator, updateUserInfo);
 app.get('/v1/user/:id/posts', jwtValidator, getUserPosts);
+app.get('/v1/user/:userId/bids', jwtValidator, getUserBids);
 
 app.get('/v1/ad/list', getAds);
 app.post('/v1/ad', jwtValidator, createAd);
@@ -66,10 +66,7 @@ app.get('/v1/ad/:id', getAd);
 app.delete('/v1/ad/:id', jwtValidator, deleteAd);
 
 app.post('/v1/bid/:adId', jwtValidator, createBid);
-// app.get('/v1/bid/:id', jwtValidator, getBidsByUserBidder);
-app.get('/v1/bids/byUserBidder/:id', jwtValidator, getBidsByUserBidder);
-app.get('/v1/bids/byUserAd/:id', jwtValidator, getBidsByUserAd);
-app.get('/v1/bid/:id', jwtValidator, getBid);
+app.get('/v1/bids/byAd/:adId', jwtValidator, getBidsByAd);
 
 app.get('/v1/getImage/:id', getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);

@@ -3,7 +3,6 @@ import app from './../../app';
 import {Ad} from '../../models/ad';
 import jwt from 'jsonwebtoken';
 import {Bid} from '../../models/bid';
-import * as getBids from './getBids';
 
 describe('Test Get Bids', () => {
     beforeEach(() => {
@@ -18,66 +17,73 @@ describe('Test Get Bids', () => {
         const userBidderId = '12345';
 
         const resp = await request(app)
-            .get(`/v1/bids/byUserBidder/${userBidderId}`)
+            .get(`/v1/bids/byAd/${userBidderId}`)
             .set({authorization: 'test 123'})
             .expect(409);
 
         expect(resp.body.error).toBe(true);
-        expect(resp.body.message).toBe(`Invalid Id, '${userBidderId}'.`);
+        expect(resp.body.message).toBe(`Invalid adId, '${userBidderId}'.`);
     });
 
     test('It should respond with an array', async () => {
         const returnData = [
             {
-                bidderUserId: '621f7dc02d49855dbe650c33',
-                addUserId: '651f7dc02d49855dbe650c33',
+                _id: '634be62c8e1a167fbc2ac172',
                 adId: '621f7dc02d49855dbe650c06',
-                price: 123,
+                bidderUserId: '63398bcaa0a1c6042261a17a',
                 description: 'test',
-                type: 'client',
-                category: 'test',
+                createdAt: '2022-10-16T11:08:28.689Z',
+                updatedAt: '2022-10-16T11:08:28.689Z',
+                bidderUser: {
+                    _id: '63398bcaa0a1c6042261a17a',
+                    firstName: 'terry',
+                    lastName: 'dsadsa',
+                    phone: '0760183832',
+                    skills: [],
+                    email: 'terryureche@gmail.com',
+                    type: 'client',
+                    rating: '0',
+                    createdAt: '2022-10-02T13:02:02.601Z',
+                    updatedAt: '2022-10-02T13:02:02.601Z',
+                },
             },
         ];
 
-        Bid.find = jest.fn().mockImplementationOnce(() => ({lean: jest.fn().mockResolvedValueOnce(returnData)}));
+        const leanData = [
+            {
+                _id: '634be62c8e1a167fbc2ac172',
+                adId: '621f7dc02d49855dbe650c06',
+                bidderUserId: {
+                    _id: '63398bcaa0a1c6042261a17a',
+                    firstName: 'terry',
+                    lastName: 'dsadsa',
+                    phone: '0760183832',
+                    skills: [],
+                    email: 'terryureche@gmail.com',
+                    type: 'client',
+                    rating: '0',
+                    createdAt: '2022-10-02T13:02:02.601Z',
+                    updatedAt: '2022-10-02T13:02:02.601Z',
+                },
+                description: 'test',
+                createdAt: '2022-10-16T11:08:28.689Z',
+                updatedAt: '2022-10-16T11:08:28.689Z',
+            },
+        ];
 
-        jest.spyOn(getBids, '_getBidsByUserBidderModels').mockReturnValueOnce(returnData as any);
+        Bid.find = jest.fn().mockImplementationOnce(() => ({
+            sort: jest.fn().mockImplementationOnce(() => ({
+                // eslint-disable-next-line max-nested-callbacks
+                populate: jest.fn().mockImplementationOnce(() => ({
+                    lean: jest.fn().mockResolvedValueOnce(leanData),
+                })),
+            })),
+        }));
 
         const adId = '621f7dc02d49855dbe650c06';
 
         const resp = await request(app)
-            .get(`/v1/bids/byUserBidder/${adId}`)
-            .set({authorization: 'test 123'})
-            .query({
-                id: adId,
-            })
-            .expect(200);
-
-        expect(resp.body.error).toBe(false);
-        expect(resp.body.records).toStrictEqual(returnData);
-    });
-
-    test('It should respond with an array', async () => {
-        const returnData = [
-            {
-                bidderUserId: '621f7dc02d49855dbe650c33',
-                addUserId: '651f7dc02d49855dbe650c33',
-                adId: '621f7dc02d49855dbe650c04',
-                price: 123,
-                description: 'test',
-                type: 'client',
-                category: 'test',
-            },
-        ];
-
-        Bid.find = jest.fn().mockImplementationOnce(() => ({lean: jest.fn().mockResolvedValueOnce(returnData)}));
-
-        jest.spyOn(getBids, '_getBidsByUserBidderModels').mockReturnValueOnce(returnData as any);
-
-        const adId = '621f7dc02d49855dbe650c04';
-
-        const resp = await request(app)
-            .get(`/v1/bids/byUserAd/${adId}`)
+            .get(`/v1/bids/byAd/${adId}`)
             .set({authorization: 'test 123'})
             .query({
                 id: adId,

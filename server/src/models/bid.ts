@@ -2,33 +2,25 @@ import {Schema, model, ObjectId} from 'mongoose';
 
 interface BidType {
     adId: ObjectId;
-    addUserId: ObjectId;
     bidderUserId: ObjectId;
-    price: number;
     description: string;
-    type: string;
-    category: string;
 }
 
 const adSchema = new Schema<BidType>({
     adId: {
         type: Schema.Types.ObjectId,
         required: true,
-    },
-    addUserId: {
-        type: Schema.Types.ObjectId,
-        required: true,
+        ref: 'ad',
     },
     bidderUserId: {
         type: Schema.Types.ObjectId,
         required: true,
+        ref: 'user',
     },
-    price: Number,
     description: String,
-    type: String,
-    category: String,
 },
 {
+    minimize: false,
     timestamps: {
         createdAt: 'createdAt',
         updatedAt: 'updatedAt',
