@@ -21,7 +21,7 @@ jobs:
           node-version: '18.x'
       - run: npm install
       - run: npm install -g @angular/cli > /dev/null
-      - run: ng build --prod --output-path=dist --base-href="https://sedo.github.io/sedo/"
+      - run: ng build --prod --output-path=dist --base-href="https://mitoi.github.io/sedo/"
       - run: npm install --silent -g typescript ts-node
       - run: npm install
         working-directory: ./server
