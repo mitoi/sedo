@@ -63,10 +63,10 @@ app.get('/v1/user/:userId/bids', jwtValidator, getUserBids);
 app.get('/v1/ad/list', getAds);
 app.post('/v1/ad', jwtValidator, createAd);
 app.get('/v1/ad/:id', getAd);
+app.get('/v1/ad/:id/bids', jwtValidator, getBidsByAd);
 app.delete('/v1/ad/:id', jwtValidator, deleteAd);
 
-app.post('/v1/bid/:adId', jwtValidator, createBid);
-app.get('/v1/bids/byAd/:adId', jwtValidator, getBidsByAd);
+app.post('/v1/bid', jwtValidator, createBid);
 
 app.get('/v1/getImage/:id', getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);

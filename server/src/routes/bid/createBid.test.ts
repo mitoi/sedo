@@ -5,15 +5,13 @@ import {User} from '../../models/user';
 import {Bid} from '../../models/bid';
 
 describe('Test create Bid', () => {
-    test('It should respond invalid ID', async () => {
+    test('It should respond missing ID', async () => {
         jest.spyOn(jwt, 'verify').mockReturnValue({
             id: '123',
         } as any);
 
-        const fakeAdId = '123-456';
-
         const resp = await request(app)
-            .post(`/v1/bid/${fakeAdId}`)
+            .post(`/v1/bid`)
             .set({authorization: 'test 123'})
             .send({
                 title: 'test',
@@ -21,7 +19,7 @@ describe('Test create Bid', () => {
             });
 
         expect(resp.body.error).toBe(true);
-        expect(resp.body.message).toBe(`Invalid Ad Id, '${fakeAdId}`);
+        expect(resp.body.message).toBe(`Ad ID is missing.`);
         expect(resp.status).toBe(409);
     });
 
@@ -33,9 +31,10 @@ describe('Test create Bid', () => {
         const fakeAdId = '6325d006d385db885810fdc6';
 
         const resp = await request(app)
-            .post(`/v1/bid/${fakeAdId}`)
+            .post(`/v1/bid`)
             .set({authorization: 'test 123'})
             .send({
+                adId: fakeAdId,
                 test: '123',
                 description: 'test description',
             });
@@ -61,9 +60,10 @@ describe('Test create Bid', () => {
         const fakeAdId = '6325d006d385db885810fdc6';
 
         const resp = await request(app)
-            .post(`/v1/bid/${fakeAdId}`)
+            .post(`/v1/bid`)
             .set({authorization: 'test 123'})
             .send({
+                adId: fakeAdId,
                 title: 'test',
                 description: 'test description',
                 bidderUserId: '621f7dc02d49855dbe650c02',

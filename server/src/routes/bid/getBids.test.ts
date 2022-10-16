@@ -14,15 +14,15 @@ describe('Test Get Bids', () => {
     test('It should respond that id is invalid', async () => {
         jest.spyOn(Ad, 'findById').mockReturnValue(false as any);
 
-        const userBidderId = '12345';
+        const adId = '12345';
 
         const resp = await request(app)
-            .get(`/v1/bids/byAd/${userBidderId}`)
+            .get(`/v1/ad/${adId}/bids`)
             .set({authorization: 'test 123'})
             .expect(409);
 
         expect(resp.body.error).toBe(true);
-        expect(resp.body.message).toBe(`Invalid adId, '${userBidderId}'.`);
+        expect(resp.body.message).toBe(`Invalid adId, '${adId}'.`);
     });
 
     test('It should respond with an array', async () => {
@@ -83,7 +83,7 @@ describe('Test Get Bids', () => {
         const adId = '621f7dc02d49855dbe650c06';
 
         const resp = await request(app)
-            .get(`/v1/bids/byAd/${adId}`)
+            .get(`/v1/ad/${adId}/bids`)
             .set({authorization: 'test 123'})
             .query({
                 id: adId,
