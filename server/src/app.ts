@@ -17,6 +17,9 @@ import {getAds} from './routes/ads/getAds';
 import {getUserInfo} from './routes/user/getUserInfo';
 import {updateUserInfo} from './routes/user/updateUserInfo';
 import {getUserPosts} from './routes/user/getUserInfo';
+import {createBid} from './routes/bid/createBid';
+import {getBidsByUserBidder, getBidsByUserAd} from './routes/bid/getBids';
+import {getBid} from './routes/bid/getBid';
 
 const app:Application = express();
 const allowedOrigins = ['http://localhost:4200'];
@@ -61,6 +64,12 @@ app.get('/v1/ad/list', getAds);
 app.post('/v1/ad', jwtValidator, createAd);
 app.get('/v1/ad/:id', getAd);
 app.delete('/v1/ad/:id', jwtValidator, deleteAd);
+
+app.post('/v1/bid/:adId', jwtValidator, createBid);
+// app.get('/v1/bid/:id', jwtValidator, getBidsByUserBidder);
+app.get('/v1/bids/byUserBidder/:id', jwtValidator, getBidsByUserBidder);
+app.get('/v1/bids/byUserAd/:id', jwtValidator, getBidsByUserAd);
+app.get('/v1/bid/:id', jwtValidator, getBid);
 
 app.get('/v1/getImage/:id', getImage);
 app.post('/v1/upload/photo', [jwtValidator, upload.single('image')], uploadPhoto);
