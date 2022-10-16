@@ -96,6 +96,11 @@ const getBidsBy = async (id: string, variableName: string, type: string, filter:
                 model: 'user',
                 select: '-password',
             },
+            {
+                path: 'adId',
+                model: 'ad',
+                select: 'title',
+            },
         ])
         .lean();
 
