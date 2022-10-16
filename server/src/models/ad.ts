@@ -1,5 +1,5 @@
 import {Schema, model, ObjectId} from 'mongoose';
-import { UserType } from './user';
+import {UserType} from './user';
 
 interface Photo {
   id: string;

@@ -24,36 +24,18 @@ const createBid = async (req: Request, res: Response) => {
     }
 
     const {
-        price,
         description,
         bidderUserId,
-        addUserId,
-        type,
-        category,
     } = req.body;
-
-    if (!price) {
-        const priceFieldName = Object.keys({price})[0];
-        return invalidField(res, price, priceFieldName);
-    }
 
     if (!bidderUserId || !Types.ObjectId.isValid(bidderUserId)) {
         const bidderUserIdFieldName = Object.keys({bidderUserId})[0];
         return invalidField(res, bidderUserId, bidderUserIdFieldName);
     }
 
-    if (!addUserId || !Types.ObjectId.isValid(addUserId)) {
-        const addUserIdFieldName = Object.keys({addUserId})[0];
-        return invalidField(res, addUserId, addUserIdFieldName);
-    }
-
     const bidAd = await Bid.create({
         adId,
-        price,
         description,
-        type,
-        category,
-        addUserId,
         bidderUserId,
     });
 

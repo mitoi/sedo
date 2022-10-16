@@ -41,7 +41,7 @@ describe('Test create Bid', () => {
             });
 
         expect(resp.body.error).toBe(true);
-        expect(resp.body.message).toBe('Invalid \'price\' field, value:\'undefined\'');
+        expect(resp.body.message).toBe('Invalid \'bidderUserId\' field, value:\'undefined\'');
         expect(resp.status).toBe(422);
     });
 
@@ -67,10 +67,6 @@ describe('Test create Bid', () => {
                 title: 'test',
                 description: 'test description',
                 bidderUserId: '621f7dc02d49855dbe650c02',
-                addUserId: '621f7dc02d49855dbe650c12',
-                type: 'ad',
-                category: 'cars',
-                price: '1132.3',
             });
 
         expect(resp.body.error).toBe(false);
