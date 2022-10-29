@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BidService } from 'src/app/services/bid.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-post-bids',
@@ -19,7 +21,9 @@ export class PostBidsComponent implements OnInit {
     ];
     dataSource: any = [];
 
-    constructor(private _bidService: BidService) {}
+    constructor(
+        private _bidService: BidService,         
+        public dialog: MatDialog,) {}
 
     ngOnInit(): void {
         this.loadBids(this.postId);
@@ -33,6 +37,16 @@ export class PostBidsComponent implements OnInit {
                 }            
             },
             error: (err) => {},
+        });
+    }
+
+    showPhone(element: any) {
+        const phone = element.bidderUser.phone;
+        const dialogData = new ConfirmDialogModel('Numar de telefon:', phone);
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            maxWidth: '400px',
+            data: dialogData,
         });
     }
 }
