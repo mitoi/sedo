@@ -10,6 +10,6 @@ Platform that connects individuals with professionals. Also you can make donatio
 5. Ability to bid for a job ✅
 6. Ability to view your profile and change your settings ✅
 7. Ability to view your Job Postings ✅
-8. Ability to view bids ❌
-9. Ability to choose one bid and see that's person phone number ❌
+8. Ability to view bids ✅
+9. Ability to choose one bid and see that's person phone number ✅
 10. Ability to filter jobs by category ✅
