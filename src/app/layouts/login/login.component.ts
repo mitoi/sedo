@@ -7,6 +7,7 @@ import { SedoService } from '../../services/sedo.service';
 import { AccountService } from 'src/app/services/account.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private breakpointObserver: BreakpointObserver, 
+  constructor(private breakpointObserver: BreakpointObserver,
     private authService: AccountService,
     private router: Router,
     private route: ActivatedRoute,
@@ -48,16 +49,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const payload = {
-      email: this.loginForm.controls['usernameCtrl'].value,
-      password: this.loginForm.controls['passwordCtrl'].value,
-    }
+    const email = this.loginForm.controls['usernameCtrl'].value;
+    const password = this.loginForm.controls['passwordCtrl'].value;
 
     this.submitted = true;
     this.loading = true;
     // reset alerts on submit
 
-    this.authService.login(this.loginForm.controls['usernameCtrl'].value, this.loginForm.controls['passwordCtrl'].value)
+    this.authService.login(email, password)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -65,8 +64,12 @@ export class LoginComponent implements OnInit {
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },
-                error: error => {
+                error: errorMessage => {
                     this.loading = false;
+                    Swal.fire({
+                        icon: 'error',
+                        text: errorMessage
+                    });
                 }
             });
   }

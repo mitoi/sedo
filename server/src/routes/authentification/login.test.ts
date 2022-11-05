@@ -35,7 +35,7 @@ describe('Test Login', () => {
             .expect(400);
 
         expect(res.body.error).toBe(true);
-        expect(res.body.message).toBe('Invalid credentials');
+        expect(res.body.message).toBe('Numele de utilizator sau parola introdusă este incorectă');
     });
 
     test('It should respond credentials are mandatory', async () => {
