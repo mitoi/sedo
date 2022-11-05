@@ -13,7 +13,7 @@ import { HttpResponse } from '@angular/common/http';
     templateUrl: './job-suggestions.component.html',
     styleUrls: ['./job-suggestions.component.css'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Default,
 })
 export class JobSuggestionsComponent implements OnInit {
     category: any;
@@ -39,11 +39,12 @@ export class JobSuggestionsComponent implements OnInit {
                     data.status == 200 &&
                     data.body
                 ) {
-                    this.postings = data.body.records;
+                    let records = data.body.records;
+                    this.postings = [...records];
                 }
             },
             error: (err) => {
-
+                this.postings = [];
             },
         });
     }
