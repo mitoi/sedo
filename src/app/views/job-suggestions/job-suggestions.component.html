@@ -1,8 +1,8 @@
-<div class="px-5 mt-10 font-bold">Anunturi din aceeasi categorie</div>
+<div class="px-5 mt-20 font-bold">Anunturi din aceeasi categorie</div>
 <div class="cdk-virtual-scroll-data-source-example px-5">
-    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="50" class="example-viewport">
-      <div *cdkVirtualFor="let posting of postings" class="example-item">
-        <app-job-grid-item [model]="posting"></app-job-grid-item>
-      </div>
+    <cdk-virtual-scroll-viewport orientation="horizontal" itemSize="10" class="viewport">
+        <div *cdkVirtualFor="let posting of postings" class="item">
+            <app-job-grid-item [model]="posting"></app-job-grid-item>
+        </div>
     </cdk-virtual-scroll-viewport>
 </div>
