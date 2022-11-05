@@ -24,7 +24,7 @@ const login = async (req: Request, res: Response) => {
         if (!user) {
             res.status(400).json({
                 error: true,
-                message: 'Invalid credentials',
+                message: 'Numele de utilizator sau parola introdusă este incorectă',
             });
 
             return;
@@ -35,7 +35,7 @@ const login = async (req: Request, res: Response) => {
         if (!isPasswordValid) {
             res.status(400).json({
                 error: true,
-                message: 'Invalid credentials',
+                message: 'Numele de utilizator sau parola introdusă este incorectă',
             });
 
             return;
