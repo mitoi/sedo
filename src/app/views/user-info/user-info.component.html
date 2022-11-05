@@ -1,6 +1,6 @@
 
 <mat-accordion class="headers-align" multi>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title> Date Personale </mat-panel-title>
             <mat-panel-description>
@@ -11,8 +11,8 @@
 
        <app-user-data></app-user-data>
     </mat-expansion-panel>
-    
-    <mat-expansion-panel *ngIf="userType == 'furnizor' || userType == 'ong'">
+
+    <mat-expansion-panel *ngIf="userType == 'furnizor' || userType == 'ong'" [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title> Anunturile tale </mat-panel-title>
             <mat-panel-description>
@@ -25,7 +25,7 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="userType == 'client'">
+    <mat-expansion-panel *ngIf="userType == 'client'" [expanded]="true">
         <mat-expansion-panel-header>
             <mat-panel-title> Anunturi la care ai aplicat </mat-panel-title>
             <mat-panel-description>

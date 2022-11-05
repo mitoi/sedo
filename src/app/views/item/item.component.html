@@ -1,11 +1,11 @@
 <app-toolbar></app-toolbar>
 <div class="container mx-auto px-5">
-  
+
   <div [ngClass]="{'columns-2': (itemPositionsLayout | async) == 2, 'columns-1': (itemPositionsLayout | async) == 1}">
     <div>
       <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
     </div>
-  
+
     <div *ngIf="model">
         <mat-card class="post-item mat-elevation-z0">
           <mat-card-header>
@@ -24,8 +24,8 @@
         <div class="mt-20" *ngIf="activeUser && activeUser.type=='client'">
           <button class="float-right w-full bg-blue-400" mat-raised-button (click)="bid()">Aplica</button>
         </div>
-        <div class="mt-20" *ngIf="!activeUser || activeUser.type!='client'">
-          Trebuie sa fii logat si sa ai cont de client pentru a aplica la acest job
+        <div class="mt-20" *ngIf="!activeUser || activeUser.type!='client'" matTooltip="Trebuie sa fiti logat cu un cont de client pentru a aplica.">
+            <button class="float-right w-full bg-blue-400" mat-raised-button [disabled]="true">Aplica</button>
         </div>
     </div>
   </div>
