@@ -33,18 +33,18 @@ export class JobGridComponent implements OnInit {
     private _searchQuery: string = '';
 
     constructor(
-        private breakpointObserver: BreakpointObserver, 
-        private postService: PostService, 
+        private breakpointObserver: BreakpointObserver,
+        private postService: PostService,
         private _snackBar: MatSnackBar,) {}
 
     ngOnInit(): void {
         this.loadPosts(this._activeCategory);
     }
-    
+
     @Input() set activeCategory(value: string) {
         this._activeCategory = value;
         this.loadPosts(this._activeCategory);
-     
+
     }
 
     @Input() set searchQuery(value: string) {

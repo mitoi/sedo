@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import {Image, ImageType} from '../../models/image';
 import _ from 'lodash';
+import {Types} from "mongoose";
 
 const getImage = async (req: Request, res: Response) => {
     const {id} = req.params;
@@ -9,6 +10,15 @@ const getImage = async (req: Request, res: Response) => {
         res.status(422).json({
             error: true,
             message: '\'id\' is required.',
+        });
+
+        return;
+    }
+
+    if (!Types.ObjectId.isValid(id)) {
+        res.status(409).json({
+            error: true,
+            message: `Invalid Id, '${id}'.`,
         });
 
         return;
