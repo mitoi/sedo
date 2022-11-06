@@ -1,7 +1,7 @@
 <mat-card class="border-2 post" (click)="onClickItem()">
     <mat-card-title-group>
         <mat-card-title>{{model.title}}</mat-card-title>
-        <mat-card-subtitle>{{model.user.firstName}} {{model.user.lastName}} - {{model.date | date}}</mat-card-subtitle>
+        <mat-card-subtitle>{{model.user?.firstName}} {{model.user?.lastName}} - {{model.date | date}}</mat-card-subtitle>
         <img mat-card-sm-image *ngIf="primaryPhotoId" src="http://localhost:3000/v1/getImage/{{primaryPhotoId}}" >
         <img mat-card-sm-image *ngIf="!primaryPhotoId" src="../../assets/No_Image_Available.jpeg" >
     </mat-card-title-group>
