@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 
 import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +15,7 @@ export class UserInfoComponent implements OnInit {
     accordion!: MatAccordion;
     loggedIn: any;
     userType: any;
+    @Input() showUserPersonalData: boolean;
 
     constructor(private accountService: AccountService) {}
 

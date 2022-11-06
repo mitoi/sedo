@@ -6,10 +6,10 @@ import { UserInfoComponent } from 'src/app/views/user-info/user-info.component';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
+    showUserPersonalData: boolean = true;
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {
+    }
 }

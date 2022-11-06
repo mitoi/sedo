@@ -63,6 +63,7 @@ import { UserBidsComponent } from './components/user-bids/user-bids.component';
 import { BidDialogComponent } from './components/bid-dialog/bid-dialog.component';
 import { PostBidsComponent } from './components/post-bids/post-bids.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MyAdsComponent} from "./layouts/my-ads/my-ads.component";
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     UserBidsComponent,
     BidDialogComponent,
     PostBidsComponent,
+      MyAdsComponent,
   ],
     imports: [
         BrowserModule,

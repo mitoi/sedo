@@ -31,12 +31,16 @@ export class ToolbarComponent implements OnInit {
   addPost(): void {
     this.router.navigate(['add_post']);
   }
-  
+
   addDonation(): void {
     this.router.navigate(['add_post'], {queryParams: {category: 'donation'}});
   }
 
   goToSettings(): void {
     this.router.navigate(['settings']);
+  }
+
+  goToMyAds(): void {
+      this.router.navigate(['my_ads']);
   }
 }

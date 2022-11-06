@@ -9,6 +9,7 @@ import {ItemComponent} from "./views/item/item.component";
 import { AuthGuard } from './helpers/auth.guard';
 import { AddPostComponent } from './layouts/add-post/add-post.component';
 import { SettingsComponent } from './layouts/settings/settings.component';
+import {MyAdsComponent} from "./layouts/my-ads/my-ads.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'item/:id', component: JobComponent},
   { path: 'add_post', component: AddPostComponent, canActivate: [AuthGuard]},
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
+    { path: 'my_ads', component: MyAdsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
